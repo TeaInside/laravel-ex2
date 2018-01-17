@@ -175,8 +175,6 @@ return [
 
         Zizaco\Confide\ServiceProvider::class,
 
-  
-
         /*
          * Package Service Providers...
          */
