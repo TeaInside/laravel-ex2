@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abb856811d7bb8ebf45bc1063439141a",
-    "content-hash": "2e8ebb6362feb019c86d1136f2b6a455",
+    "hash": "aa4ef5367d91bc3ce8968c6cbc6f2902",
+    "content-hash": "437cfbb9fa5f04e67629c4966aa1729a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -262,6 +262,42 @@
                 "parser"
             ],
             "time": "2017-11-14 20:44:03"
+        },
+        {
+            "name": "fguillot/json-rpc",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fguillot/JsonRPC.git",
+                "reference": "0a77cd311783431c851e4c8eed33858663c17277"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/0a77cd311783431c851e4c8eed33858663c17277",
+                "reference": "0a77cd311783431c851e4c8eed33858663c17277",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonRPC": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frédéric Guillot"
+                }
+            ],
+            "description": "Simple Json-RPC client/server library that just works",
+            "homepage": "https://github.com/fguillot/JsonRPC",
+            "time": "2015-09-19 02:27:10"
         },
         {
             "name": "fideloper/proxy",
@@ -2239,6 +2275,56 @@
                 "dump"
             ],
             "time": "2018-01-03 17:14:19"
+        },
+        {
+            "name": "thiagof/laravelrpc",
+            "version": "0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagof/laravelrpc.git",
+                "reference": "280fa9b53aa65ef0ac7849406ae6496f9731a9f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagof/laravelrpc/zipball/280fa9b53aa65ef0ac7849406ae6496f9731a9f5",
+                "reference": "280fa9b53aa65ef0ac7849406ae6496f9731a9f5",
+                "shasum": ""
+            },
+            "require": {
+                "fguillot/json-rpc": "1.0.*",
+                "illuminate/support": ">=5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "laravel/laravel": ">=5.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thiagof\\LaravelRPC\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Fernandes",
+                    "email": "thiago@internetbudi.com.br"
+                }
+            ],
+            "description": "JsonRPC Client/Server services for Laravel 5",
+            "keywords": [
+                "client",
+                "json-rpc",
+                "jsonrpc",
+                "laravel",
+                "rpc",
+                "server"
+            ],
+            "time": "2016-11-03 20:35:26"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
