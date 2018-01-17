@@ -34,7 +34,7 @@ AmCharts.loadJSON=function(timeSpan,buttonClick){
 	console.log('timeSpan_:',timeSpan_);
 	$('.loading').show();
 	$.ajax({
-		url:getChartURL,
+		url:'/get-chart',
 		type:'post',
 		dataType:'json',
 		data: {Ajax:1,timeSpan:timeSpan_,market_id:getMarketID},
@@ -202,7 +202,7 @@ function createStockChart(){
 		function drawOrderDepthChart(){
       		  $('.loading').show();
        		 $.ajax({
-       		     url:getOrderDepthChart,
+       		     url:'/get-orderdepth-chart',
         	     type:'post',
         	     dataType:'json',
 				 data: {Ajax:1,market_id:getMarketID},
