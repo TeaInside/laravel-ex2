@@ -10,7 +10,8 @@
         "illuminate/html": "^5.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.2.0"
+        "laravelcollective/html": "^5.2.0",
+        "thiagof/laravelrpc": "^0.2.2"
     },
     "minimum-stability": "dev",
     "require-dev": {
