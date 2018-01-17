@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use Config;
+use Request;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\Role;
@@ -940,7 +941,7 @@ class OrderController extends Controller
     //correct here
     public function getOrderDepthChart()
     {
-        $market_id=Input::get('market_id');
+        $market_id=Request::get('market_id');
         $order = new Order();
         $order_sell=$order->getOrders($market_id, 'sell', 100);
         $total_amount=0;
