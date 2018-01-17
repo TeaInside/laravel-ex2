@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://laravel.com/docs/queries -->
+<html lang="en" class="wf-sourcesanspro-n4-active wf-sourcesanspro-n6-active wf-sourcesanspro-n7-active wf-sourcecodepro-n4-active wf-sourcesanspro-i3-active wf-sourcesanspro-i4-active wf-sourcesanspro-i6-active wf-sourcesanspro-i7-active wf-sourcesanspro-n3-active wf-active wf-sourcecodepro-n7-active" data-ember-extension="1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Laravel - The PHP Framework For Web Artisans.</title>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9,chrome=1">
+    <meta name="author" content="iKreativ">
+    <meta name="description" content="Laravel - The PHP framework for web artisans.">
+    <meta name="keywords" content="laravel, php, framework, web, artisans, taylor otwell">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="http://laravel.com/favicon.png?v=2">
+
+    <!-- we're minifying and combining all our css -->
+    <link href="http://laravel.com/assets/css/style.css" rel="stylesheet">
+
+    <!-- grab jquery from google cdn. fall back to local if offline -->
+    <script src="./Laravel - The PHP Framework For Web Artisans._files/ga.js"></script><script src="./Laravel - The PHP Framework For Web Artisans._files/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/jquery.js"><\/script>')</script>
+
+    <!-- prettyprint -->
+    <link rel="stylesheet" type="text/css" href="./Laravel - The PHP Framework For Web Artisans._files/prettify.css">
+
+    <!-- load up our js -->
+    <script src="./Laravel - The PHP Framework For Web Artisans._files/plugins.js"></script>
+    <script src="./Laravel - The PHP Framework For Web Artisans._files/application.js"></script>
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="http://use.edgefonts.net/c/6eeea6/source-sans-pro:i3:i4:i6:i7:n3:n4:n6:n7.Xw4:N:2,Xw2:N:2,Xw7:N:2,Xvz:N:2,Xw3:N:2,Xw5:N:2,Xw6:N:2,Xvy:N:2/d"><script src="./Laravel - The PHP Framework For Web Artisans._files/source-sans-pro-n3,i3,n4,i4,n6,i6,n7,i7.js"></script>
+    <link rel="stylesheet" href="http://use.edgefonts.net/c/582e7d/source-code-pro:n4:n7.Y1M:N:2,Y1P:N:2/d"><script src="./Laravel - The PHP Framework For Web Artisans._files/source-code-pro.js"></script>
+
+    <!-- some conditionals for ie -->
+    <!--[if IE]><link href="assets/css/ie.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+    <!-- HTML5 elements in less than IE9, yes please! -->
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+    <!-- If less than IE8 add some JS for the webfont icons -->
+    <!--[if lt IE 8]><script src="assets/js/ie_font.js"></script><![endif]-->
+
+    <!-- asynchronous google analytics. change UA-XXXXX-X to your site's ID -->
+    <script>
+        var _gaq=[['_setAccount','UA-23865777-1'],['_trackPageview']];
+        (function(d,t){
+    		var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        	g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        	s.parentNode.insertBefore(g,s)
+    	}(document,'script'));
+    </script>
+</head>
+
+<body id="index" class="page docs" data-ember-extension="1" style="">
+
+	<!-- wrapper -->
+    <div id="wrapper">
+
+        <!-- header -->
+        <header id="header" role="header" style="-webkit-transform: translateY(2603.5px);">
+            <div class="boxed">
+                <!-- tagline -->
+                <div id="tagline">
+                    <h1>Documentation.</h1>
+                </div>
+                <!-- /tagline -->
+
+                <!-- version -->
+                <div id="version">
+                    <ul class="nolist">
+                                                    <li><a href="http://laravel.com/docs/dev" title="Dev">Dev</a></li>
+                            <li class="current"><a href="http://laravel.com/docs/4-1" title="4.1">4.1</a></li>
+                            <li><a href="http://laravel.com/docs/4-0" title="4.0">4.0</a></li>
+                                            </ul>
+                </div>
+                <!-- /version -->
+            </div>
+        </header>
+        <!-- /header -->
+
+        <!-- nav -->
+    	<nav id="primary" style="position: fixed; width: 100%; top: 0px; opacity: 0.9;">
+    	    <div class="boxed">
+    	        <div id="logo-head">
+    	           <a href="http://laravel.com/"><img src="./Laravel - The PHP Framework For Web Artisans._files/logo-head.png" alt="Laravel"></a>
+    	        </div>
+                <ul>
+                    <li><a href="http://laravel.com/">Welcome</a></li>
+                    <li class="current-item"><a href="http://laravel.com/docs/docs" title="Documentation">Documentation</a></li>
+                    <li><a href="http://laravel.com/api/4.1" title="Laravel Framework API">API</a></li>
+                    <li><a href="https://github.com/laravel/laravel" title="Github">Github</a></li>
+                    <li><a href="http://laravel.io/forum" title="Laravel Forums">Forums</a></li>
+                    <li><a href="http://twitter.com/laravelphp" title="Laravel on Twitter">Twitter</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /nav -->
+
+        <!-- content -->
+        <div id="content" style="padding-top: 75px;">
+
+            <!-- docs -->
+            <section id="documentation">
+                <article class="boxed">
+
+                    <!-- docs nav -->
+                    <nav id="docs">
+                        <!-- Pull table of contents -->
+                        <ul>
+<li>Preface
+
+<ul>
+<li><a href="http://laravel.com/docs/introduction">Introduction</a></li>
+<li><a href="http://laravel.com/docs/quick">Quickstart</a></li>
+<li><a href="http://laravel.com/docs/releases">Release Notes</a></li>
+<li><a href="http://laravel.com/docs/upgrade">Upgrade Guide</a></li>
+</ul></li>
+<li>Getting Started
+
+<ul>
+<li><a href="http://laravel.com/docs/installation">Installation</a></li>
+<li><a href="http://laravel.com/docs/configuration">Configuration</a></li>
+<li><a href="http://laravel.com/docs/lifecycle">Request Lifecycle</a></li>
+<li><a href="http://laravel.com/docs/routing">Routing</a></li>
+<li><a href="http://laravel.com/docs/requests">Requests &amp; Input</a></li>
+<li><a href="http://laravel.com/docs/responses">Views &amp; Responses</a></li>
+<li><a href="http://laravel.com/docs/controllers">Controllers</a></li>
+<li><a href="http://laravel.com/docs/errors">Errors &amp; Logging</a></li>
+</ul></li>
+<li>Learning More
+
+<ul>
+<li><a href="http://laravel.com/docs/security">Authentication</a></li>
+<li><a href="http://laravel.com/docs/cache">Cache</a></li>
+<li><a href="http://laravel.com/docs/extending">Core Extension</a></li>
+<li><a href="http://laravel.com/docs/events">Events</a></li>
+<li><a href="http://laravel.com/docs/facades">Facades</a></li>
+<li><a href="http://laravel.com/docs/html">Forms &amp; HTML</a></li>
+<li><a href="http://laravel.com/docs/helpers">Helpers</a></li>
+<li><a href="http://laravel.com/docs/ioc">IoC Container</a></li>
+<li><a href="http://laravel.com/docs/localization">Localization</a></li>
+<li><a href="http://laravel.com/docs/mail">Mail</a></li>
+<li><a href="http://laravel.com/docs/packages">Package Development</a></li>
+<li><a href="http://laravel.com/docs/pagination">Pagination</a></li>
+<li><a href="http://laravel.com/docs/queues">Queues</a></li>
+<li><a href="http://laravel.com/docs/security">Security</a></li>
+<li><a href="http://laravel.com/docs/session">Session</a></li>
+<li><a href="http://laravel.com/docs/ssh">SSH</a></li>
+<li><a href="http://laravel.com/docs/templates">Templates</a></li>
+<li><a href="http://laravel.com/docs/testing">Unit Testing</a></li>
+<li><a href="http://laravel.com/docs/validation">Validation</a></li>
+</ul></li>
+<li>Database
+
+<ul>
+<li><a href="http://laravel.com/docs/database">Basic Usage</a></li>
+<li><a href="./Laravel - The PHP Framework For Web Artisans._files/Laravel - The PHP Framework For Web Artisans..htm">Query Builder</a></li>
+<li><a href="http://laravel.com/docs/eloquent">Eloquent ORM</a></li>
+<li><a href="http://laravel.com/docs/schema">Schema Builder</a></li>
+<li><a href="http://laravel.com/docs/migrations">Migrations &amp; Seeding</a></li>
+<li><a href="http://laravel.com/docs/redis">Redis</a></li>
+</ul></li>
+<li>Artisan CLI
+
+<ul>
+<li><a href="http://laravel.com/docs/artisan">Overview</a></li>
+<li><a href="http://laravel.com/docs/commands">Development</a></li>
+</ul></li>
+</ul>
+                    </nav>
+                    <!-- /docs nav -->
+
+                    <!-- docs content -->
+                    <div id="docs-content" style="padding-top: 27px;">
+                        <h1>Query Builder</h1>
+
+<ul>
+<li><a href="http://laravel.com/docs/queries#introduction">Introduction</a></li>
+<li><a href="http://laravel.com/docs/queries#selects">Selects</a></li>
+<li><a href="http://laravel.com/docs/queries#joins">Joins</a></li>
+<li><a href="http://laravel.com/docs/queries#advanced-wheres">Advanced Wheres</a></li>
+<li><a href="http://laravel.com/docs/queries#aggregates">Aggregates</a></li>
+<li><a href="http://laravel.com/docs/queries#raw-expressions">Raw Expressions</a></li>
+<li><a href="http://laravel.com/docs/queries#inserts">Inserts</a></li>
+<li><a href="http://laravel.com/docs/queries#updates">Updates</a></li>
+<li><a href="http://laravel.com/docs/queries#deletes">Deletes</a></li>
+<li><a href="http://laravel.com/docs/queries#unions">Unions</a></li>
+<li><a href="http://laravel.com/docs/queries#pessimistic-locking">Pessimistic Locking</a></li>
+<li><a href="http://laravel.com/docs/queries#caching-queries">Caching Queries</a></li>
+</ul>
+
+<p><a name="introduction"></a></p>
+
+<h2>Introduction</h2>
+
+<p>The database query builder provides a convenient, fluent interface to creating and running database queries. It can be used to perform most database operations in your application, and works on all supported database systems.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> The Laravel query builder uses PDO parameter binding throughout to protect your application against SQL injection attacks. There is no need to clean strings being passed as bindings.</p>
+</blockquote>
+
+<p><a name="selects"></a></p>
+
+<h2>Selects</h2>
+
+<h4>Retrieving All Rows From A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span><span class="pln">
+
+</span><span class="kwd">foreach</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$users </span><span class="kwd">as</span><span class="pln"> $user</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">{</span><span class="pln">
+    var_dump</span><span class="pun">(</span><span class="pln">$user</span><span class="pun">-&gt;</span><span class="pln">name</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<h4>Retrieving A Single Row From A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$user </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'John'</span><span class="pun">)-&gt;</span><span class="pln">first</span><span class="pun">();</span><span class="pln">
+
+var_dump</span><span class="pun">(</span><span class="pln">$user</span><span class="pun">-&gt;</span><span class="pln">name</span><span class="pun">);</span></code></pre>
+
+<h4>Retrieving A Single Column From A Row</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$name </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'John'</span><span class="pun">)-&gt;</span><span class="pln">pluck</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">);</span></code></pre>
+
+<h4>Retrieving A List Of Column Values</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$roles </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'roles'</span><span class="pun">)-&gt;</span><span class="pln">lists</span><span class="pun">(</span><span class="str">'title'</span><span class="pun">);</span></code></pre>
+
+<p>This method will return an array of role titles. You may also specify a custom key column for the returned array:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$roles </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'roles'</span><span class="pun">)-&gt;</span><span class="pln">lists</span><span class="pun">(</span><span class="str">'title'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'name'</span><span class="pun">);</span></code></pre>
+
+<h4>Specifying A Select Clause</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'email'</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span><span class="pln">
+
+$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">distinct</span><span class="pun">()-&gt;</span><span class="kwd">get</span><span class="pun">();</span><span class="pln">
+
+$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="str">'name as user_name'</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Adding A Select Clause To An Existing Query</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$query </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">);</span><span class="pln">
+
+$users </span><span class="pun">=</span><span class="pln"> $query</span><span class="pun">-&gt;</span><span class="pln">addSelect</span><span class="pun">(</span><span class="str">'age'</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Using Where Operators</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Or Statements</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">orWhere</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'John'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Using Where Between</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">whereBetween</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">))-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Using Where Not Between</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">whereNotBetween</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">))-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Using Where In With An Array</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">whereIn</span><span class="pun">(</span><span class="str">'id'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">))-&gt;</span><span class="kwd">get</span><span class="pun">();</span><span class="pln">
+
+$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">whereNotIn</span><span class="pun">(</span><span class="str">'id'</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">))-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Using Where Null To Find Records With Unset Values</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">whereNull</span><span class="pun">(</span><span class="str">'updated_at'</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Order By, Group By, And Having</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">orderBy</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'desc'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">groupBy</span><span class="pun">(</span><span class="str">'count'</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="pln">having</span><span class="pun">(</span><span class="str">'count'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)</span><span class="pln">
+                    </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Offset &amp; Limit</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">skip</span><span class="pun">(</span><span class="lit">10</span><span class="pun">)-&gt;</span><span class="pln">take</span><span class="pun">(</span><span class="lit">5</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p><a name="joins"></a></p>
+
+<h2>Joins</h2>
+
+<p>The query builder may also be used to write join statements. Take a look at the following examples:</p>
+
+<h4>Basic Join Statement</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="pln">join</span><span class="pun">(</span><span class="str">'contacts'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'contacts.user_id'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="pln">join</span><span class="pun">(</span><span class="str">'orders'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'orders.user_id'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'contacts.phone'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'orders.price'</span><span class="pun">);</span></code></pre>
+
+<h4>Left Join Statement</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="pln">leftJoin</span><span class="pun">(</span><span class="str">'posts'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'posts.user_id'</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>You may also specify more advanced join clauses:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="pln">join</span><span class="pun">(</span><span class="str">'contacts'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$join</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+            $join</span><span class="pun">-&gt;</span><span class="pln">on</span><span class="pun">(</span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'contacts.user_id'</span><span class="pun">)-&gt;</span><span class="pln">orOn</span><span class="pun">(...);</span><span class="pln">
+        </span><span class="pun">})</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>If you would like to use a "where" style clause on your joins, you may use the <code>where</code> and <code>orWhere</code> methods on a join. Instead of comparing two columns, these methods will compare the column against a value:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="pln">join</span><span class="pun">(</span><span class="str">'contacts'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$join</span><span class="pun">)</span><span class="pln">
+        </span><span class="pun">{</span><span class="pln">
+            $join</span><span class="pun">-&gt;</span><span class="pln">on</span><span class="pun">(</span><span class="str">'users.id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'contacts.user_id'</span><span class="pun">)</span><span class="pln">
+                 </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'contacts.user_id'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5</span><span class="pun">);</span><span class="pln">
+        </span><span class="pun">})</span><span class="pln">
+        </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p><a name="advanced-wheres"></a></p>
+
+<h2>Advanced Wheres</h2>
+
+<p>Sometimes you may need to create more advanced where clauses such as "where exists" or nested parameter groupings. The Laravel query builder can handle these as well:</p>
+
+<h4>Parameter Grouping</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'name'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'='</span><span class="pun">,</span><span class="pln"> </span><span class="str">'John'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="pln">orWhere</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$query</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">{</span><span class="pln">
+                $query</span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)</span><span class="pln">
+                      </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'title'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&lt;&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'Admin'</span><span class="pun">);</span><span class="pln">
+            </span><span class="pun">})</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>The query above will produce the following SQL:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="kwd">select</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> users </span><span class="kwd">where</span><span class="pln"> name </span><span class="pun">=</span><span class="pln"> </span><span class="str">'John'</span><span class="pln"> </span><span class="kwd">or</span><span class="pln"> </span><span class="pun">(</span><span class="pln">votes </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">100</span><span class="pln"> </span><span class="kwd">and</span><span class="pln"> title </span><span class="pun">&lt;&gt;</span><span class="pln"> </span><span class="str">'Admin'</span><span class="pun">)</span></code></pre>
+
+<h4>Exists Statements</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="pln">whereExists</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">$query</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">{</span><span class="pln">
+                $query</span><span class="pun">-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="pln">DB</span><span class="pun">::</span><span class="pln">raw</span><span class="pun">(</span><span class="lit">1</span><span class="pun">))</span><span class="pln">
+                      </span><span class="pun">-&gt;</span><span class="kwd">from</span><span class="pun">(</span><span class="str">'orders'</span><span class="pun">)</span><span class="pln">
+                      </span><span class="pun">-&gt;</span><span class="pln">whereRaw</span><span class="pun">(</span><span class="str">'orders.user_id = users.id'</span><span class="pun">);</span><span class="pln">
+            </span><span class="pun">})</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>The query above will produce the following SQL:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="kwd">select</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> users
+</span><span class="kwd">where</span><span class="pln"> exists </span><span class="pun">(</span><span class="pln">
+    </span><span class="kwd">select</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="kwd">from</span><span class="pln"> orders </span><span class="kwd">where</span><span class="pln"> orders</span><span class="pun">.</span><span class="pln">user_id </span><span class="pun">=</span><span class="pln"> users</span><span class="pun">.</span><span class="pln">id
+</span><span class="pun">)</span></code></pre>
+
+<p><a name="aggregates"></a></p>
+
+<h2>Aggregates</h2>
+
+<p>The query builder also provides a variety of aggregate methods, such as <code>count</code>, <code>max</code>, <code>min</code>, <code>avg</code>, and <code>sum</code>.</p>
+
+<h4>Using Aggregate Methods</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">count</span><span class="pun">();</span><span class="pln">
+
+$price </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'orders'</span><span class="pun">)-&gt;</span><span class="pln">max</span><span class="pun">(</span><span class="str">'price'</span><span class="pun">);</span><span class="pln">
+
+$price </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'orders'</span><span class="pun">)-&gt;</span><span class="pln">min</span><span class="pun">(</span><span class="str">'price'</span><span class="pun">);</span><span class="pln">
+
+$price </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'orders'</span><span class="pun">)-&gt;</span><span class="pln">avg</span><span class="pun">(</span><span class="str">'price'</span><span class="pun">);</span><span class="pln">
+
+$total </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">sum</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">);</span></code></pre>
+
+<p><a name="raw-expressions"></a></p>
+
+<h2>Raw Expressions</h2>
+
+<p>Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the <code>DB::raw</code> method:</p>
+
+<h4>Using A Raw Expression</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+                     </span><span class="pun">-&gt;</span><span class="kwd">select</span><span class="pun">(</span><span class="pln">DB</span><span class="pun">::</span><span class="pln">raw</span><span class="pun">(</span><span class="str">'count(*) as user_count, status'</span><span class="pun">))</span><span class="pln">
+                     </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'status'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&lt;&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln">
+                     </span><span class="pun">-&gt;</span><span class="pln">groupBy</span><span class="pun">(</span><span class="str">'status'</span><span class="pun">)</span><span class="pln">
+                     </span><span class="pun">-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<h4>Incrementing or decrementing a value of a column</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">increment</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">);</span><span class="pln">
+
+DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">increment</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5</span><span class="pun">);</span><span class="pln">
+
+DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">decrement</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">);</span><span class="pln">
+
+DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">decrement</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">5</span><span class="pun">);</span></code></pre>
+
+<p>You may also specify additional columns to update:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">increment</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> array</span><span class="pun">(</span><span class="str">'name'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'John'</span><span class="pun">));</span></code></pre>
+
+<p><a name="inserts"></a></p>
+
+<h2>Inserts</h2>
+
+<h4>Inserting Records Into A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">insert</span><span class="pun">(</span><span class="pln">
+    array</span><span class="pun">(</span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'john@example.com'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'votes'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">);</span></code></pre>
+
+<p>If the table has an auto-incrementing id, use <code>insertGetId</code> to insert a record and retrieve the id:</p>
+
+<h4>Inserting Records Into A Table With An Auto-Incrementing ID</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$id </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">insertGetId</span><span class="pun">(</span><span class="pln">
+    array</span><span class="pun">(</span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'john@example.com'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'votes'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">);</span></code></pre>
+
+<blockquote>
+  <p><strong>Note:</strong> When using PostgreSQL the insertGetId method expects the auto-incrementing column to be named "id".</p>
+</blockquote>
+
+<h4>Inserting Multiple Records Into A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">insert</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="pln">
+    array</span><span class="pun">(</span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'taylor@example.com'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'votes'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln">
+    array</span><span class="pun">(</span><span class="str">'email'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="str">'dayle@example.com'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'votes'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">),</span><span class="pln">
+</span><span class="pun">));</span></code></pre>
+
+<p><a name="updates"></a></p>
+
+<h2>Updates</h2>
+
+<h4>Updating Records In A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'id'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln">
+            </span><span class="pun">-&gt;</span><span class="pln">update</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'votes'</span><span class="pln"> </span><span class="pun">=&gt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">));</span></code></pre>
+
+<p><a name="deletes"></a></p>
+
+<h2>Deletes</h2>
+
+<h4>Deleting Records In A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&lt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)-&gt;</span><span class="kwd">delete</span><span class="pun">();</span></code></pre>
+
+<h4>Deleting All Records From A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">delete</span><span class="pun">();</span></code></pre>
+
+<h4>Truncating A Table</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">truncate</span><span class="pun">();</span></code></pre>
+
+<p><a name="unions"></a></p>
+
+<h2>Unions</h2>
+
+<p>The query builder also provides a quick way to "union" two queries together:</p>
+
+<h4>Performing A Query Union</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$first </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">whereNull</span><span class="pun">(</span><span class="str">'first_name'</span><span class="pun">);</span><span class="pln">
+
+$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">whereNull</span><span class="pun">(</span><span class="str">'last_name'</span><span class="pun">)-&gt;</span><span class="kwd">union</span><span class="pun">(</span><span class="pln">$first</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>The <code>unionAll</code> method is also available, and has the same method signature as <code>union</code>.</p>
+
+<p><a name="pessimistic-locking"></a></p>
+
+<h2>Pessimistic Locking</h2>
+
+<p>The query builder includes a few functions to help you do "pessimistic locking" on your SELECT statements.</p>
+
+<p>To run the SELECT statement with a "shared lock", you may use the <code>sharedLock</code> method on a query:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)-&gt;</span><span class="pln">sharedLock</span><span class="pun">()-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>To "lock for update" on a SELECT statement, you may use the <code>lockForUpdate</code> method on a query:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="kwd">where</span><span class="pun">(</span><span class="str">'votes'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'&gt;'</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">)-&gt;</span><span class="pln">lockForUpdate</span><span class="pun">()-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p><a name="caching-queries"></a></p>
+
+<h2>Caching Queries</h2>
+
+<p>You may easily cache the results of a query using the <code>remember</code> method:</p>
+
+<h4>Caching A Query Result</h4>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">remember</span><span class="pun">(</span><span class="lit">10</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+
+<p>In this example, the results of the query will be cached for ten minutes. While the results are cached, the query will not be run against the database, and the results will be loaded from the default cache driver specified for your application.</p>
+
+<p>If you are using a <a href="http://laravel.com/docs/cache#cache-tags">supported cache driver</a>, you can also add tags to the caches:</p>
+
+<pre class="prettyprint prettyprinted" style=""><code><span class="pln">$users </span><span class="pun">=</span><span class="pln"> DB</span><span class="pun">::</span><span class="pln">table</span><span class="pun">(</span><span class="str">'users'</span><span class="pun">)-&gt;</span><span class="pln">cacheTags</span><span class="pun">(</span><span class="pln">array</span><span class="pun">(</span><span class="str">'people'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'authors'</span><span class="pun">))-&gt;</span><span class="pln">remember</span><span class="pun">(</span><span class="lit">10</span><span class="pun">)-&gt;</span><span class="kwd">get</span><span class="pun">();</span></code></pre>
+                    </div>
+                    <!-- /docs content -->
+
+                </article>
+    	    </section>
+    	    <!-- /docs -->
+
+        </div>
+    	<!-- /content -->
+
+        <!-- footer -->
+        <footer id="foot" class="textcenter">
+            <div class="boxed">
+
+                <!-- nav -->
+                <nav id="secondary">
+                    <div id="logo-foot">
+        	           <a href="http://laravel.com/"><img src="./Laravel - The PHP Framework For Web Artisans._files/logo-foot.png" alt="Laravel"></a>
+        	        </div>
+                    <ul>
+                        <li><a href="http://laravel.com/">Welcome</a></li>
+                        <li class="current-item"><a href="http://laravel.com/docs/docs" title="Documentation">Documentation</a></li>
+                        <li><a href="http://laravel.com/docs/api/4.1" title="Laravel Framework API">API</a></li>
+                        <li><a href="https://github.com/laravel/laravel" title="Github">Github</a></li>
+                        <li><a href="http://laravel.io/forum" title="Laravel Forums">Forums</a></li>
+                        <li><a href="http://twitter.com/laravelphp" title="Laravel on Twitter">Twitter</a></li>
+                    </ul>
+                </nav>
+                <!-- /nav -->
+
+            </div>
+        </footer>
+        <!-- /footer -->
+
+        <!-- to the top -->
+        <div id="top" style="display: block;">
+            <a href="http://laravel.com/docs/queries#index" title="Back to the top">
+                <i class="icon-chevron-up"></i>
+            </a>
+        </div>
+        <!-- /to the top -->
+
+    </div>
+    <!-- /wrapper -->
+
+    <!-- copyright -->
+    <section id="copyright" class="textcenter" style="z-index: 22;">
+        <div class="boxed">
+            <div class="animated slideInLeft">Laravel is a trademark of Taylor Otwell. Copyright © <a href="http://twitter.com/taylorotwell" title="Taylor Otwell" target="_blank">Taylor Otwell</a>. Website built with ♥ <a href="http://ikreativ.com/" title="iKreativ" target="_blank">iKreativ</a>.</div>
+        </div>
+    </section>
+    <!-- /copyright -->
+
+
+
+</body></html>
