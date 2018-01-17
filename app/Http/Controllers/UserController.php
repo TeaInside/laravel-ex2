@@ -111,8 +111,9 @@ class UserController extends Controller
         $data['question2s'] = SecurityQuestion::where('type', '=', '2')->get();
         return view(
             /*Config::get('confide::signup_form')*/
-            'register'
-        ,$data);
+            'register',
+            $data
+        );
     }
     /**
      * Stores new account
