@@ -179,8 +179,8 @@ class HomeController extends Controller
 
             //price
             $data_price = $trade->getBlockPrice($market_id);
-            $data["get_prices"] = $data_price['get_prices'];
-            $data['latest_price'] = $data_price['latest_price'];
+            $data["get_prices"] = isset($data_price['get_prices']) ? $data_price['get_prices'] : 0;
+            $data['latest_price'] = isset($data_price['latest_price']) ? $data_price['latest_price'] : 0;
 
 
             //limit trade amount

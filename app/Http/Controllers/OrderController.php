@@ -3,8 +3,12 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use Auth;
+use Lang;
 use Config;
 use Request;
+use Confide;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\Role;

@@ -176,8 +176,8 @@ Route::group(array('before' => 'auth', 'prefix' => 'user'), function () {
 
 
 //trading
-Route::post('dobuy', 'OrderController@doBuy');
-Route::post('dosell', 'OrderController@doSell');
+Route::post('dobuy', 'OrderController@doBuy')->name('order.do.buy');
+Route::post('dosell', 'OrderController@doSell')->name('order.do.sell')
 Route::post('docancel', 'OrderController@doCancel');
 
 //correct here

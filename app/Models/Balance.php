@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DB;
+use Log;
 use Auth;
 use Confide;
 use Illuminate\Database\Eloquent\Model as Eloquent;
