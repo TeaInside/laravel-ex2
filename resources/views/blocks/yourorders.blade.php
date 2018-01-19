@@ -120,7 +120,7 @@
 		//$(el).attr("disabled", "disabled");
 		$.ajax({
 			type: 'post',
-			url: '<?php echo action('OrderController@doCancel')?>',
+			url: '/docancel',
 			datatype: 'json',
 			data: {isAjax: 1, order_id: order_id },
 			beforeSend: function(request) {
