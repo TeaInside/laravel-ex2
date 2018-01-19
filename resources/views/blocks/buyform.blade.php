@@ -238,8 +238,8 @@ function doPostTradeOrder(tradeArray){
 			
 
 			if(obj.status == 'success'){
-				socket.emit( 'subscribeAllMarkets', obj.message_socket);
-				socket.emit( 'userOrder', obj.message_socket_user);
+				//socket.emit( 'subscribeAllMarkets', obj.message_socket);
+				//socket.emit( 'userOrder', obj.message_socket_user);
 				showMessage(obj.messages,'success');
 			}else{
 				showMessage(obj.messages,'error');

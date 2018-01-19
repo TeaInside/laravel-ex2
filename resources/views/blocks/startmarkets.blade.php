@@ -48,7 +48,7 @@
 						<?php
 							
 
-							if( (sprintf('%.8f',$am['prices']->max) !== null)){
+							if (isset($am['prices']->max)){
 								if ( sprintf('%.8f',$am['prices']->max)+0 == 0 )
 									$coin_max_ = '';
 								else

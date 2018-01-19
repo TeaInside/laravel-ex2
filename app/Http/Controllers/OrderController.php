@@ -816,7 +816,7 @@ class OrderController extends Controller
         $orders = Order::find($order_id);
 
         
-        if (count($orders) > 0) {    //icee - Check if order exists
+        if (count($orders->toArray()) > 0) {    //icee - Check if order exists
             $user = Confide::user();
             $balance = new Balance();
         

@@ -128,13 +128,13 @@
 			},
 			success:function(response) {
 				var obj = $.parseJSON(response); 
-				socket.emit( 'subscribeAllMarkets', obj.message_socket);
+				//socket.emit( 'subscribeAllMarkets', obj.message_socket);
 				var title ='Order removal';
 				var msg ='';
 				  
 				  if(obj.status == 'success'){
 					//app.BrainSocket.message('doTrade',obj.message_socket);
-					socket.emit( 'doTrade', obj.message_socket);
+					//socket.emit( 'doTrade', obj.message_socket);
 					
 					msg = obj.message;
 					$('#yourorder-'+order_id).fadeOut();
