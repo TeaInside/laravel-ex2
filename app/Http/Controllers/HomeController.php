@@ -387,10 +387,9 @@ class HomeController extends Controller
                             'num_vote' => $num_vote + $num_payment,
                         );
                     }
-                    usort($coinvotes, create_function(
-                        '$a, $b',
-                        'if ($a->num_vote == $b->num_vote) return 0; return ($a->num_vote > $b->num_vote) ? -1 : 1;'
-                    ));
+                    usort($coinvotes, function($a, $b) {
+                        if ($a->num_vote == $b->num_vote) return 0; return ($a->num_vote > $b->num_vote) ? -1 : 1;
+                    });
                 } catch (Exception $e) {
                     //$data['error_message']= 'Caught exception: '.$e->getMessage()."\n";  //"Not connect to this
                     die('Page is in maintenance mode');

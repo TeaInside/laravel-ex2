@@ -4,6 +4,7 @@ namespace App\Models;
 
 use DB;
 use Auth;
+use Confide;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Order extends Eloquent
