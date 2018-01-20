@@ -18,7 +18,7 @@
 							
 							{{ trans('user_texts.login_with_two_factor') }}
 							
-							{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::getToken()  , 'blue|white', 'button|flat' ) }}
+							{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::token()  , 'blue|white', 'button|flat' ) }}
 						</div>						
 					@else
 						
@@ -28,15 +28,15 @@
 							
 							{{ trans('user_texts.login_with_two_factor') }}
 							
-							{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::getToken()  , 'blue|white', 'button|flat' ) }}
+							{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::token()  , 'blue|white', 'button|flat' ) }}
 						</div>
 					@endif
 				
 					@if ( !Session::get('two_factor_authentication') )
-						<form class="form-horizontal" role="form" id="registerForm" method="POST" action="{{{ Confide::checkAction('UserController@do-login') ?: URL::to('/user/login') }}}" >
+						<form class="form-horizontal" role="form" id="registerForm" method="POST" action="{{{ Auth::check('UserController@do-login') ?: URL::to('/user/login') }}}" >
 					
 
-						<input type="hidden" name="_token" id="_token" value="{{{ Session::getToken() }}}">
+						<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 				  
 						<fieldset>
 							
@@ -91,10 +91,10 @@
                 </div>
                 <div class="panel-footer">
 					<div class="sign_up">
-						<a href="{{{ Confide::checkAction('UserController@register') }}}">{{{ Lang::get('confide::confide.signup.desc') }}}</a>
+						<a href="{{{ Auth::check('UserController@register') }}}">{{{ Lang::get('confide::confide.signup.desc') }}}</a>
 					</div>
 					<div class="forgot_password">						
-						<a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
+						<a href="{{{ (Auth::check('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
 					</div>
 				
 				</div>

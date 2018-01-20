@@ -5,7 +5,7 @@
 {{--@if(isset($message_error))
 <div class="alert alert-error">{{{ $message_error }}}</div>
 @else
-<form class="form-horizontal" role="form" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@updateSetting') ?: URL::to('/admin/update-setting') }}}" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@updateSetting') ?: URL::to('/admin/update-setting') }}}" enctype="multipart/form-data">
 	@if ( Session::get('error') )
       <div class="alert alert-error">{{{ Session::get('error') }}}</div>
 	@endif

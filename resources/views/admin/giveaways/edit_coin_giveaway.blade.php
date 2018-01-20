@@ -17,7 +17,7 @@
 
 <form class="form-horizontal" role="form" method="POST" action="{{{ URL::to('/admin/edit-coin-giveaway') }}}" id="add_post">
     <div class="form-group">
-		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+		<input type="hidden" name="_token" value="{{{ Session::token() }}}">
         <label for="wallet_id" class="col-sm-2 control-label">Wallet</label>
         <div class="col-sm-10">
             <select class="form-control" name="wallet_id" id="wallet_id">

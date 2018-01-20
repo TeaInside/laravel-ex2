@@ -19,9 +19,9 @@
 				<span >{{trans('user_texts.title_login')}}</span>
 			</div>
 			
-				<form id="registerForm" class="login clearfix" method="POST" action="{{{ Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') }}}" >
+				<form id="registerForm" class="login clearfix" method="POST" action="{{{ Auth::check('UserController@do_login') ?: URL::to('/user/login') }}}" >
 				<div class="form-group">
-				  <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+				  <input type="hidden" name="_token" value="{{{ Session::token() }}}">
 						<p class="field">
 							<input type="text" tabindex="1" name="email" id="email" placeholder="{{{ Lang::get('confide::confide.username') }}}" value="{{{ Input::old('email') }}}" />
 							<i class="icon-user icon-large"></i>
@@ -51,10 +51,10 @@
 				</form>
 				<div class="signup_forgot_field">
 					<div class="sign_up">
-						<a href="{{{ Confide::checkAction('UserController@register') }}}">{{{ Lang::get('confide::confide.signup.desc') }}}</a>
+						<a href="{{{ Auth::check('UserController@register') }}}">{{{ Lang::get('confide::confide.signup.desc') }}}</a>
 					</div>
 					<div class="forgot_password">						
-						<a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
+						<a href="{{{ (Auth::check('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
 					</div>
 				</div>
 			</section>
@@ -72,7 +72,7 @@
 				  <div class="alert">{{{ Session::get('notice') }}}</div>
 			  @endif
 
-			<form id="login_verify_1" onsubmit="return _tryVerify()" action="{{{ Confide::checkAction('AuthController@ajVerifyToken') ?: URL::to('/user/verify_token') }}}" method="post" style="margin-bottom:4px;display:none;">
+			<form id="login_verify_1" onsubmit="return _tryVerify()" action="{{{ Auth::check('AuthController@ajVerifyToken') ?: URL::to('/user/verify_token') }}}" method="post" style="margin-bottom:4px;display:none;">
 					<input type="text" id="token" name="token" placeholder="{{trans('user_texts.token')}}">  
 					<input type="hidden" id="authy_id" name="authy_id">  
 					<button type="submit" class="btn btn-primary" id="do_verify" onclick="_tryVerify()">{{trans('user_texts.verify')}}</button>

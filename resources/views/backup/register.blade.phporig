@@ -6,8 +6,8 @@
  };
  </script>
 <h1>{{trans('user_texts.register_account')}}</h1>
-<form id="registerForm" method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
-    <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form id="registerForm" method="POST" action="{{{ (Auth::check('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
+    <input type="hidden" name="_token" value="{{{ Session::token() }}}">
     <h3>{{trans('user_texts.your_details')}}</h3>
     <table class="table register">
         <tbody>

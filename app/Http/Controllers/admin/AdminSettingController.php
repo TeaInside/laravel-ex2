@@ -2,9 +2,45 @@
 
 namespace App\Http\Controllers\admin;
 
+use DB;
+use Lang;
+use Config;
+use Request;
+use Redirect;
+use App\Models\News;
+use App\Models\Post;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Vote;
+use App\Models\Order;
+use App\Models\Trade;
+use App\Models\Limits;
+use App\Models\Market;
+use App\Models\Wallet;
+use App\Models\Balance;
+use App\Models\Deposit;
+use App\Models\Setting;
+use App\Models\FeeTrade;
+use App\Models\CoinVote;
+use App\Models\Transfer;
+use App\Models\Withdraw;
+use App\Models\Giveaways;
+use App\Models\FeeWithdraw;
+use App\Models\Notifications;
+use App\Models\Giveawayclaims;
+use App\Models\Authentication;
+use App\Models\WalletLimitTrade;
+use App\Models\SecurityQuestion;
+use App\Models\UserAddressDeposit;
+use App\Models\UserSecurityQuestion;
 use App\Http\Controllers\Controller;
 
-class Admin_SettingController extends Controller
+$a = DB::connection()->getPdo();
+$a->exec("SET sql_mode = ''; ");
+$a->exec("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
+
+
+class AdminSettingController extends Controller
 {
 
     /*
@@ -55,11 +91,11 @@ class Admin_SettingController extends Controller
                     ->select('fee_trade.*', 'market.wallet_from', 'wallets.name', 'wallets.type')->orderby('wallets.name', 'asc')->get();
                 //echo "<pre>fee_trades: "; print_r($fee_trades); echo "</pre>";
                 //echo "<pre>markets: "; print_r($markets); echo "</pre>";exit;
-                return View::make('admin.setting_fee', $data);
+                return view('admin.setting_fee', $data);
                 break;
             case 'fee-withdraw':
                 $data['fee_withdraws'] = FeeWithdraw::leftjoin('wallets', 'fee_withdraw.wallet_id', '=', 'wallets.id')->select('fee_withdraw.*', 'wallets.type', 'wallets.name')->orderby('wallets.type')->get();
-                return View::make('admin.setting_fee_withdraw', $data);
+                return view('admin.setting_fee_withdraw', $data);
                 break;
             case 'limit-trade':
                 $record_per_page = 15;
@@ -72,7 +108,7 @@ class Admin_SettingController extends Controller
                 $offset_start = ($pager_page-1)*$record_per_page;
                 $data['wallets'] = Wallet::orderby('type')->get();
                 $data['limit_trades'] = WalletLimitTrade::leftjoin('wallets', 'wallet_limittrade.wallet_id', '=', 'wallets.id')->select('wallet_limittrade.*', 'wallets.type as wallet_type', 'wallets.name as wallet_name')->skip($offset_start)->take($record_per_page)->orderby('wallet_type')->get();
-                return View::make('admin.limittrade.setting_limittrade', $data);
+                return view('admin.limittrade.setting_limittrade', $data);
                 break;
             case 'statistic-coin-exchanged':
                 $select = "SELECT mk.wallet_from, mk.wallet_to, sum(amount) as total_amount from trade_history a left join market mk on a.market_id=mk.id";
@@ -115,7 +151,7 @@ class Admin_SettingController extends Controller
                     $wallets[$wallet->id] = $wallet;
                 }
                 $data['wallets'] = $wallets;
-                return View::make('admin.statistics.statistic_coin_exchanged', $data);
+                return view('admin.statistics.statistic_coin_exchanged', $data);
                 break;
             case 'statistic-fees':
                 $select = "SELECT mk.wallet_from, mk.wallet_to, sum(fee_sell) as fee_sell, sum(fee_buy) as fee_buy from trade_history a left join market mk on a.market_id=mk.id";
@@ -161,7 +197,7 @@ class Admin_SettingController extends Controller
                     $wallets[$wallet->id] = $wallet;
                 }
                 $data['wallets'] = $wallets;
-                return View::make('admin.statistics.statistic_fees', $data);
+                return view('admin.statistics.statistic_fees', $data);
                 break;
             case 'statistic-fee-withdraw':
                 $select = "SELECT w.type, w.name, sum(fee_amount) as total_fee from withdraws a left join wallets w on a.wallet_id=w.id";
@@ -190,15 +226,15 @@ class Admin_SettingController extends Controller
                 $select .= " ".$where." group by a.wallet_id";
                 $withdraw_fees = DB::select($select);
                 $data['withdraw_fees'] = $withdraw_fees;
-                return View::make('admin.statistics.statistic_fee_withdraw', $data);
+                return view('admin.statistics.statistic_fee_withdraw', $data);
                 break;
             case 'add-page':
                 $data['type'] = 'page';
-                return View::make('admin.pages.add_post', $data);
+                return view('admin.pages.add_post', $data);
                 break;
             case 'add-news':
                 $data['type'] = 'news';
-                return View::make('admin.pages.add_post', $data);
+                return view('admin.pages.add_post', $data);
                 break;
             case 'all-page':
                 $data['type'] = 'page';
@@ -212,7 +248,7 @@ class Admin_SettingController extends Controller
                 $offset_start = ($pager_page-1)*$record_per_page;
                 $posts = Post::where('type', $data['type'])->skip($offset_start)->take($record_per_page)->get();
                 $data['posts'] = $posts;
-                return View::make('admin.pages.all_posts', $data);
+                return view('admin.pages.all_posts', $data);
                 break;
             case 'all-news':
                 $data['type'] = 'news';
@@ -226,7 +262,7 @@ class Admin_SettingController extends Controller
                 $offset_start = ($pager_page-1)*$record_per_page;
                 $posts = Post::where('type', $data['type'])->skip($offset_start)->take($record_per_page)->get();
                 $data['posts'] = $posts;
-                return View::make('admin.pages.all_posts', $data);
+                return view('admin.pages.all_posts', $data);
                 break;
 
             case 'add-coin-news':
@@ -248,7 +284,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['market_list'] = $market_list;
 
-                return View::make('admin.pages.add_coin_news', $data);
+                return view('admin.pages.add_coin_news', $data);
                 break;
             case 'all-coin-news':
                 $record_per_page = 15;
@@ -261,7 +297,7 @@ class Admin_SettingController extends Controller
                 $offset_start = ($pager_page-1)*$record_per_page;
                 $news = News::skip($offset_start)->take($record_per_page)->get();
                 $data['news'] = $news;
-                return View::make('admin.pages.all_coin_news', $data);
+                return view('admin.pages.all_coin_news', $data);
                 break;
             case 'withdraw-limits':
                 $record_per_page = 50;
@@ -282,7 +318,7 @@ class Admin_SettingController extends Controller
 
                 $data['limits'] = $limits;
 
-                return View::make('admin.limits.all_limits', $data);
+                return view('admin.limits.all_limits', $data);
                 break;
             case 'add-withdraw-limit':
                 $wallets = Wallet::orderby('type')->get();
@@ -292,7 +328,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['wallet_list'] = $wallet_list;
 
-                return View::make('admin.limits.add_withdraw_limit', $data);
+                return view('admin.limits.add_withdraw_limit', $data);
                 break;
 
             case 'coin-giveaways':
@@ -314,7 +350,7 @@ class Admin_SettingController extends Controller
 
                 $data['giveaways'] = $giveaways;
 
-                return View::make('admin.giveaways.all_giveaways', $data);
+                return view('admin.giveaways.all_giveaways', $data);
                 break;
             case 'add-coin-giveaway':
                 $wallets = Wallet::orderby('type')->get();
@@ -324,7 +360,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['wallet_list'] = $wallet_list;
 
-                return View::make('admin.giveaways.add_coin_giveaway', $data);
+                return view('admin.giveaways.add_coin_giveaway', $data);
                 break;
 
             case 'users':
@@ -350,7 +386,7 @@ class Admin_SettingController extends Controller
                 $roles = Role::get();
                 $data['users'] = $users;
                 $data['roles'] = $roles;
-                return View::make('admin.user.manage_users', $data);
+                return view('admin.user.manage_users', $data);
                 break;
             case 'orders':
                 $record_per_page = 15;
@@ -388,7 +424,7 @@ class Admin_SettingController extends Controller
                 $ordershistory = DB::select($select);
                 $data['ordershistories'] = $ordershistory;
                 
-                return View::make('admin.orders', $data);
+                return view('admin.orders', $data);
                 break;
             case 'trade-histories':
                 $record_per_page = 15;
@@ -435,7 +471,7 @@ class Admin_SettingController extends Controller
                 $select .= " ".$where." order by `created_at` desc limit ".$offset_start.",".$record_per_page;
                 $trades = DB::select($select);
                 $data['tradehistories'] = $trades;
-                return View::make('admin.trade_histories', $data);
+                return view('admin.trade_histories', $data);
                 break;
             case 'coins-voting':
                 $coinvotes = DB::table('coin_votes')->get();
@@ -463,7 +499,7 @@ class Admin_SettingController extends Controller
                 } else {
                     $data['not_wallet'] = "Please add BTC wallet before add the vote coin.";
                 }
-                return View::make('admin.coins_voting', $data);
+                return view('admin.coins_voting', $data);
                 break;
             case 'funds':
                 $wallets = Wallet::leftjoin('fee_withdraw', 'fee_withdraw.wallet_id', '=', 'wallets.id')->orderby('type')->get();
@@ -490,7 +526,7 @@ class Admin_SettingController extends Controller
                 $data['balances'] = $balances;
                 $data['fee_withdraws'] = $fee_withdraws;
                 //echo "<pre>fee_withdraws"; print_r($fee_withdraws); echo "</pre>";
-                return View::make('admin.funds', $data);
+                return view('admin.funds', $data);
                 break;
             case 'withdraws-queue':
                 $record_per_page = 20;
@@ -517,7 +553,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['wallets'] = $new_wallet;
                 $data['withdraws'] = $withdraws;
-                return View::make('admin.withdraws_queue', $data);
+                return view('admin.withdraws_queue', $data);
                 break;
             case 'deposits-queue':
                 $record_per_page = 20;
@@ -544,7 +580,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['wallets'] = $new_wallet;
                 $data['deposits'] = $deposits;
-                return View::make('admin.deposits_queue', $data);
+                return view('admin.deposits_queue', $data);
                 break;
             case 'wallets':
                 $record_per_page = 15;
@@ -558,7 +594,7 @@ class Admin_SettingController extends Controller
 
                 $wallets = Wallet::skip($offset_start)->take($record_per_page)->orderby('name')->get();
                 $data['wallets'] = $wallets;
-                return View::make('admin.wallet.manage_wallets', $data);
+                return view('admin.wallet.manage_wallets', $data);
                 break;
             case 'markets':
                 $record_per_page = 15;
@@ -579,7 +615,7 @@ class Admin_SettingController extends Controller
                 }
                 $data['wallets'] = $wallets;
                 
-                return View::make('admin.manage_markets', $data);
+                return view('admin.manage_markets', $data);
                 break;
             case 'balance-wallets':
                 $record_per_page = 15;
@@ -614,7 +650,7 @@ class Admin_SettingController extends Controller
                 $data['amount_transaction']=$amount_transaction;
                 $data['balances']=$balances;
                 
-                return View::make('admin.wallet.manage_wallets_balance', $data);
+                return view('admin.wallet.manage_wallets_balance', $data);
                 break;
             default:
                 $setting = new Setting();
@@ -642,7 +678,7 @@ class Admin_SettingController extends Controller
                 $data['percent_point_reward_referred_trade']=$setting->getSetting('percent_point_reward_referred_trade', 0);
 
                 //echo "<pre>data: "; print_r($data); echo "</pre>"; exit;
-                return View::make('admin.setting', $data);
+                return view('admin.setting', $data);
                 break;
         }
     }
@@ -650,8 +686,8 @@ class Admin_SettingController extends Controller
     
     public function addWithdrawLimit()
     {
-        $wallet_id = Input::get('wallet_id');
-        $amount = floatval(Input::get('amount'));
+        $wallet_id = Request::get('wallet_id');
+        $amount = floatval(Request::get('amount'));
 
         $wallet = Wallet::where('id', $wallet_id)->first();
 
@@ -684,13 +720,13 @@ class Admin_SettingController extends Controller
         $data['wallet_list'] = $wallet_list;
 
         $data['limit'] = Limits::find($limit_id);
-        return View::make('admin.limits.edit_withdraw_limit', $data);
+        return view('admin.limits.edit_withdraw_limit', $data);
     }
     public function doEditWithdrawLimit()
     {
-        $wallet_id = Input::get('wallet_id');
-        $amount = floatval(Input::get('amount'));
-        $limit_id = Input::get('limit_id');
+        $wallet_id = Request::get('wallet_id');
+        $amount = floatval(Request::get('amount'));
+        $limit_id = Request::get('limit_id');
 
         $wallet = Wallet::where('id', $wallet_id)->first();
 
@@ -715,12 +751,12 @@ class Admin_SettingController extends Controller
     }
     public function deleteWithdrawLimit()
     {
-        $limit_id = Input::get('limit_id');
+        $limit_id = Request::get('limit_id');
         $limits = Limits::find($limit_id);
         if (isset($limits->id)) {
             Limits::where('id', $limit_id)->delete();
             $message = $limits->wallet_type." withdraw limit ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -728,7 +764,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = "Entry does not exist";
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -739,9 +775,9 @@ class Admin_SettingController extends Controller
 
     public function addCoinGiveaway()
     {
-        $wallet_id = Input::get('wallet_id');
-        $amount = floatval(Input::get('amount'));
-        $time_interval = intval(Input::get('time_interval'));
+        $wallet_id = Request::get('wallet_id');
+        $amount = floatval(Request::get('amount'));
+        $time_interval = intval(Request::get('time_interval'));
 
         $wallet = Wallet::where('id', $wallet_id)->first();
 
@@ -775,14 +811,14 @@ class Admin_SettingController extends Controller
         $data['wallet_list'] = $wallet_list;
 
         $data['giveaway'] = Giveaways::find($giveaway_id);
-        return View::make('admin.giveaways.edit_coin_giveaway', $data);
+        return view('admin.giveaways.edit_coin_giveaway', $data);
     }
     public function doEditCoinGiveaway()
     {
-        $wallet_id = Input::get('wallet_id');
-        $amount = floatval(Input::get('amount'));
-        $time_interval = intval(Input::get('time_interval'));
-        $giveaway_id = Input::get('giveaway_id');
+        $wallet_id = Request::get('wallet_id');
+        $amount = floatval(Request::get('amount'));
+        $time_interval = intval(Request::get('time_interval'));
+        $giveaway_id = Request::get('giveaway_id');
 
         $wallet = Wallet::where('id', $wallet_id)->first();
 
@@ -807,12 +843,12 @@ class Admin_SettingController extends Controller
     }
     public function deleteCoinGiveaway()
     {
-        $giveaway_id = Input::get('giveaway_id');
+        $giveaway_id = Request::get('giveaway_id');
         $giveaways = Giveaways::find($giveaway_id);
         if (isset($giveaways->id)) {
             Giveaways::where('id', $giveaway_id)->delete();
             $message = $giveaways->wallet_type." coin giveaway ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -820,7 +856,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = "Entry does not exist";
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -832,28 +868,28 @@ class Admin_SettingController extends Controller
     public function updateSetting()
     {
         $setting = new Setting();
-        $site_mode = Input::get('site_mode');
-        //$bg_color = Input::get('bg_color');
-        //$bg_file = Input::file('bg_file');
-        $disable_withdraw = Input::get('disable_withdraw');
-        $disable_points = Input::get('disable_points');
+        $site_mode = Request::get('site_mode');
+        //$bg_color = Request::get('bg_color');
+        //$bg_file = Request::file('bg_file');
+        $disable_withdraw = Request::get('disable_withdraw');
+        $disable_points = Request::get('disable_points');
         
         //$setting->putSetting('bg_color',$bg_color);
         $setting->putSetting('site_mode', $site_mode);
         $setting->putSetting('disable_withdraw', $disable_withdraw);
         $setting->putSetting('disable_points', $disable_points);
 
-        $recaptcha_publickey = Input::get('recaptcha_publickey');
-        $recaptcha_privatekey = Input::get('recaptcha_privatekey');
+        $recaptcha_publickey = Request::get('recaptcha_publickey');
+        $recaptcha_privatekey = Request::get('recaptcha_privatekey');
         $setting->putSetting('recaptcha_publickey', $recaptcha_publickey);
         $setting->putSetting('recaptcha_privatekey', $recaptcha_privatekey);
 
-        $amount_btc_per_vote = is_numeric(Input::get('amount_btc_per_vote'))? Input::get('amount_btc_per_vote'):0.0001;
+        $amount_btc_per_vote = is_numeric(Request::get('amount_btc_per_vote'))? Request::get('amount_btc_per_vote'):0.0001;
         $setting->putSetting('amount_btc_per_vote', $amount_btc_per_vote);
 
-        $pusher_app_id = Input::get('pusher_app_id');
-        $pusher_app_key = Input::get('pusher_app_key');
-        $pusher_app_secret = Input::get('pusher_app_secret');
+        $pusher_app_id = Request::get('pusher_app_id');
+        $pusher_app_key = Request::get('pusher_app_key');
+        $pusher_app_secret = Request::get('pusher_app_secret');
         //echo "pusher_app_id: ".$pusher_app_id." -- pusher_app_key: ".$pusher_app_key." -- pusher_app_secret: ".$pusher_app_secret;
         //exit;
         $setting->putSetting('pusher_app_id', $pusher_app_id);
@@ -861,14 +897,14 @@ class Admin_SettingController extends Controller
         $setting->putSetting('pusher_app_secret', $pusher_app_secret);
 
         //points
-        $point_per_btc = Input::get('point_per_btc');
-        $percent_point_reward_trade = Input::get('percent_point_reward_trade');
-        $percent_point_reward_referred_trade = Input::get('percent_point_reward_referred_trade');
+        $point_per_btc = Request::get('point_per_btc');
+        $percent_point_reward_trade = Request::get('percent_point_reward_trade');
+        $percent_point_reward_referred_trade = Request::get('percent_point_reward_referred_trade');
         $setting->putSetting('point_per_btc', $point_per_btc);
         $setting->putSetting('percent_point_reward_trade', $percent_point_reward_trade);
         $setting->putSetting('percent_point_reward_referred_trade', $percent_point_reward_referred_trade);
 
-        $setting->putSetting('default_market', Input::get('default_market'));
+        $setting->putSetting('default_market', Request::get('default_market'));
         /*if(!empty($bg_file)){
         	$extension = $bg_file->getClientOriginalExtension();
 	        $destinationPath = 'upload/images/';
@@ -886,25 +922,25 @@ class Admin_SettingController extends Controller
     }
     public function setFeeTrade()
     {
-        $fee_buy = Input::get('buy_fee');
-        $fee_sell = Input::get('sell_fee');
-        $market_id = Input::get('market_id');
+        $fee_buy = Request::get('buy_fee');
+        $fee_sell = Request::get('sell_fee');
+        $market_id = Request::get('market_id');
         FeeTrade::where('market_id', $market_id)->update(array('fee_buy'=>$fee_buy,'fee_sell'=>$fee_sell));
         return Redirect::to('admin/setting/fee')->with('success', Lang::get('messages.update_success'));
     }
     public function setFeeWithdraw()
     {
-        $fee_withdraw = Input::get('fee_withdraw');
-        $coin = Input::get('coin');
+        $fee_withdraw = Request::get('fee_withdraw');
+        $coin = Request::get('coin');
         FeeWithdraw::where('wallet_id', $coin)->update(array('percent_fee'=>$fee_withdraw));
         return Redirect::to('admin/setting/fee-withdraw')->with('success', Lang::get('messages.update_success'));
     }
 
     public function addNewCoinVote()
     {
-        $code = strtoupper(Input::get('code'));
-        $name = Input::get('name');
-        //$btc_address = Input::get('btc_address');
+        $code = strtoupper(Request::get('code'));
+        $name = Request::get('name');
+        //$btc_address = Request::get('btc_address');
         //$check_coinvote = CoinVote::where('code',$code)->orwhere('btc_address',$btc_address)->first();
         $check_coinvote = CoinVote::where('code', $code)->first();
         if (isset($check_coinvote->id)) {
@@ -944,18 +980,18 @@ class Admin_SettingController extends Controller
     {
         $user = new User;
 
-        $user->fullname = Input::get('fullname');
-        $user->username = Input::get('username');
-        $user->email = Input::get('email');
-        $user->password = Input::get('password');
+        $user->fullname = Request::get('fullname');
+        $user->username = Request::get('username');
+        $user->email = Request::get('email');
+        $user->password = Request::get('password');
         $user->banned = 0;
         $user->confirmed = 1;
-        $roles = Input::get('roles');
+        $roles = Request::get('roles');
         //echo "<pre>roles"; print_r($roles); echo "</pre>"; exit;
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
         // auto validation.
-        $user->password_confirmation = Input::get('password_confirmation');
+        $user->password_confirmation = Request::get('password_confirmation');
         $user_email = User::where('email', $user->email)->first();
         if (isset($user_email->id)) {
             return Redirect::to('admin/manage/users')->with('error', Lang::get('messages.email_exist'));
@@ -983,7 +1019,7 @@ class Admin_SettingController extends Controller
         } else {
             // Get validation errors (see Ardent package)
             $error = $user->errors()->all(':message');
-            return Redirect::to('admin/manage/users')->withInput(Input::except('password'))->with('error', $error);
+            return Redirect::to('admin/manage/users')->withInput(Request::except('password'))->with('error', $error);
         }
     }
 
@@ -1002,19 +1038,19 @@ class Admin_SettingController extends Controller
         $data['roles'] = $roles;
         //echo "<pre>roles: "; print_r($data['roles']); echo "</pre>";
         //echo "<pre>user_roles: "; print_r($data['user_roles']); echo "</pre>";
-        return View::make('admin.user.edit_user', $data);
+        return view('admin.user.edit_user', $data);
     }
 
     public function doEditUSer()
     {
         $update= array('updated_at'=>date("Y-m-d H:i:s"));
-        $fullname = Input::get('fullname');
-        //$username = Input::get( 'username' );
-        $email = Input::get('email');
-        $password = Input::get('password');
-        $confirmed = Input::get('confirmed');
-        $banned = Input::get('banned');
-        $user_id = Input::get('user_id');
+        $fullname = Request::get('fullname');
+        //$username = Request::get( 'username' );
+        $email = Request::get('email');
+        $password = Request::get('password');
+        $confirmed = Request::get('confirmed');
+        $banned = Request::get('banned');
+        $user_id = Request::get('user_id');
         $user_email = User::where('email', $email)->where('id', '!=', $user_id)->first();
         if (isset($user_email->id)) {
             return Redirect::to('admin/edit-user/'.$user_id)->with('error', Lang::get('messages.email_exist'));
@@ -1028,7 +1064,7 @@ class Admin_SettingController extends Controller
         $update['confirmed'] = $confirmed;
         $update['banned'] = $banned;
         User::where('id', $user_id)->update($update);
-        $roles = Input::get('roles');
+        $roles = Request::get('roles');
         DB::table('users_roles')->where('user_id', $user_id)->delete();
         foreach ($roles as $role) {
             $user->addRole($role);
@@ -1039,13 +1075,13 @@ class Admin_SettingController extends Controller
 
     public function deleteUSer()
     {
-        $user_id = Input::get('user_id');
+        $user_id = Request::get('user_id');
         $user = User::find($user_id);
         if (isset($user->id)) {
             DB::table('users_roles')->where('user_id', $user_id)->delete();
             User::where('id', $user_id)->delete();
             $message = $user->username." ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1053,7 +1089,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = Lang::get('messages.user_not_exist');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1064,12 +1100,12 @@ class Admin_SettingController extends Controller
     }
     public function banUSer()
     {
-        $user_id = Input::get('user_id');
+        $user_id = Request::get('user_id');
         $user = User::find($user_id);
         if (isset($user->id)) {
             User::where('id', $user_id)->update(array('banned'=>1));
             $message = Lang::get('messages.banned_success') ." ".$user->username.".";
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1077,7 +1113,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = Lang::get('messages.user_not_exist');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1089,33 +1125,33 @@ class Admin_SettingController extends Controller
 
     public function addNewWallet()
     {
-        $type = strtoupper(Input::get('type'));
-        $name = Input::get('name');
-        $wallet_username = Input::get('wallet_username');
-        $password = Input::get('password');
-        $ip = Input::get('ip');
-        $port = Input::get('port');
-        //$confirm_count = ( !empty(Input::get('confirm_count')) ) ? Input::get('confirm_count') : 1;
-        $confirm_count = Input::get('confirm_count');
+        $type = strtoupper(Request::get('type'));
+        $name = Request::get('name');
+        $wallet_username = Request::get('wallet_username');
+        $password = Request::get('password');
+        $ip = Request::get('ip');
+        $port = Request::get('port');
+        //$confirm_count = ( !empty(Request::get('confirm_count')) ) ? Request::get('confirm_count') : 1;
+        $confirm_count = Request::get('confirm_count');
         $confirm_count = (!empty($confirm_count)) ? (int)$confirm_count : 1;
 
         
-        $enable_deposit = Input::get('enable_deposit');
+        $enable_deposit = Request::get('enable_deposit');
         $enable_deposit = (!empty($enable_deposit)) ? (int)$enable_deposit : 0;
         
-        $enable_withdraw = Input::get('enable_withdraw');
+        $enable_withdraw = Request::get('enable_withdraw');
         $enable_withdraw = (!empty($enable_withdraw)) ? (int)$enable_withdraw : 0;
 
-        $enable_trading = Input::get('enable_trading');
+        $enable_trading = Request::get('enable_trading');
         $enable_trading = (!empty($enable_trading)) ? (int)$enable_trading : 0;
         
-        $download_wallet_client = Input::get('download_wallet_client');
+        $download_wallet_client = Request::get('download_wallet_client');
         $check_wallet = Wallet::where('type', '=', $type)->first();
         if (isset($check_wallet->id)) {
             return Redirect::to('admin/manage/wallets')->with('error', Lang::get('messages.wallet_exist'));
         }
 
-        $logo_coin=Input::file('logo_coin');
+        $logo_coin=Request::file('logo_coin');
         $logo='';
         if (!empty($logo_coin)) {
             $extension = $logo_coin->getClientOriginalExtension();
@@ -1165,15 +1201,15 @@ class Admin_SettingController extends Controller
             return Redirect::to('admin/manage/wallets')->with('error', Lang::get('messages.wallet_not_exist'));
         }
         $data['wallet'] = $wallet;
-        return View::make('admin.wallet.edit_wallet', $data);
+        return view('admin.wallet.edit_wallet', $data);
     }
 
     public function doEditWallet()
     {
-        $wallet_id = Input::get('wallet_id');
+        $wallet_id = Request::get('wallet_id');
         $wallet = Wallet::find($wallet_id);
         
-        $logo_coin=Input::file('logo_coin');
+        $logo_coin=Request::file('logo_coin');
         $logo='';
         if (!empty($logo_coin)) {
             $extension = $logo_coin->getClientOriginalExtension();
@@ -1188,57 +1224,57 @@ class Admin_SettingController extends Controller
                 return Redirect::to('admin')->with('notice', 'The extension of image invalid');
             }
         }
-        //$enable_deposit = !empty(Input::get('eanble_withdraw'))? Input::get('eanble_withdraw'):0;
-        //$enable_withdraw = !empty(Input::get('eanble_withdraw'))? Input::get('eanble_withdraw'):0;
+        //$enable_deposit = !empty(Request::get('eanble_withdraw'))? Request::get('eanble_withdraw'):0;
+        //$enable_withdraw = !empty(Request::get('eanble_withdraw'))? Request::get('eanble_withdraw'):0;
 
-        $wallet->name = Input::get('name');
-        $wallet->wallet_username = Input::get('wallet_username');
-        $wallet->wallet_password = Input::get('password');
-        $wallet->wallet_ip = Input::get('ip');
-        $wallet->port = Input::get('port');
-        //$wallet->confirm_count = !empty(Input::get('confirm_count'))? Input::get('confirm_count'):1;
-        if ((Input::get('confirm_count'))=='') {
+        $wallet->name = Request::get('name');
+        $wallet->wallet_username = Request::get('wallet_username');
+        $wallet->wallet_password = Request::get('password');
+        $wallet->wallet_ip = Request::get('ip');
+        $wallet->port = Request::get('port');
+        //$wallet->confirm_count = !empty(Request::get('confirm_count'))? Request::get('confirm_count'):1;
+        if ((Request::get('confirm_count'))=='') {
             $wallet->confirm_count=1;
         } else {
-            $wallet->confirm_count=Input::get('confirm_count');
+            $wallet->confirm_count=Request::get('confirm_count');
         }
-        //$wallet->enable_deposit = !empty(Input::get('enable_deposit'))? Input::get('enable_deposit'):0;
-        if ((Input::get('enable_deposit'))=='') {
+        //$wallet->enable_deposit = !empty(Request::get('enable_deposit'))? Request::get('enable_deposit'):0;
+        if ((Request::get('enable_deposit'))=='') {
             $wallet->enable_deposit=0;
         } else {
-            $wallet->enable_deposit=Input::get('enable_deposit');
+            $wallet->enable_deposit=Request::get('enable_deposit');
         }
-        //$wallet->enable_withdraw = !empty(Input::get('enable_withdraw'))? Input::get('enable_withdraw'):0;
-        if ((Input::get('enable_withdraw'))=='') {
+        //$wallet->enable_withdraw = !empty(Request::get('enable_withdraw'))? Request::get('enable_withdraw'):0;
+        if ((Request::get('enable_withdraw'))=='') {
             $wallet->enable_withdraw=0;
         } else {
-            $wallet->enable_withdraw=Input::get('enable_withdraw');
+            $wallet->enable_withdraw=Request::get('enable_withdraw');
         }
 
-        if ((Input::get('enable_trading'))=='') {
+        if ((Request::get('enable_trading'))=='') {
             $wallet->enable_trading=0;
         } else {
-            $wallet->enable_trading=Input::get('enable_trading');
+            $wallet->enable_trading=Request::get('enable_trading');
         }
         
-        $wallet->download_wallet_client=Input::get('download_wallet_client');
+        $wallet->download_wallet_client=Request::get('download_wallet_client');
         
         $wallet->save();
-        //echo "<pre>Input"; print_r(Input::all()); echo "</pre>";
+        //echo "<pre>Input"; print_r(Request::all()); echo "</pre>";
         //echo "<pre>wallet"; print_r($wallet); echo "</pre>";
         return Redirect::to('admin/manage/wallets')->with('success', Lang::get('messages.update_success'));
     }
 
     public function deleteWallet()
     {
-        $wallet_id = Input::get('wallet_id');
+        $wallet_id = Request::get('wallet_id');
         $wallet = Wallet::find($wallet_id);
         if (isset($wallet->id)) {
             Wallet::where('id', $wallet_id)->delete();
             FeeWithdraw::where("wallet_id", $wallet_id)->delete();
             WalletLimitTrade::where("wallet_id", $wallet_id)->delete();
             $message = $wallet->type." ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1246,7 +1282,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = Lang::get('messages.wallet_not_exist');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1258,8 +1294,8 @@ class Admin_SettingController extends Controller
 
     public function addNewMarket()
     {
-        $wallet_from = Input::get('wallet_from');
-        $wallet_to = Input::get('wallet_to');
+        $wallet_from = Request::get('wallet_from');
+        $wallet_to = Request::get('wallet_to');
         if ($wallet_from == $wallet_to) {
             return Redirect::to('admin/manage/markets')->with('error', Lang::get('messages.walletfrom_different_walletto'));
         }
@@ -1286,13 +1322,13 @@ class Admin_SettingController extends Controller
     }
     public function deleteMarket()
     {
-        $market_id = Input::get('market_id');
+        $market_id = Request::get('market_id');
         $market = Market::find($market_id);
         if (isset($market->id)) {
             Market::where('id', $market_id)->delete();
             FeeTrade::where('market_id', $market_id)->delete();
             $message = Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1300,7 +1336,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = Lang::get('messages.market_not_exist');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1312,10 +1348,10 @@ class Admin_SettingController extends Controller
 
     public function addNewPost()
     {
-        $type = Input::get('type');
-        $title = Input::get('title');
-        $body = Input::get('body');
-        $show_menu = Input::get('show_menu');
+        $type = Request::get('type');
+        $title = Request::get('title');
+        $body = Request::get('body');
+        $show_menu = Request::get('show_menu');
         if (!empty($type) && !empty($title) && !empty($body)) {
             $post = new Post();
             $post->title = $title;
@@ -1337,16 +1373,16 @@ class Admin_SettingController extends Controller
     public function editPost($post_id)
     {
         $data['post'] = Post::find($post_id);
-        return View::make('admin.pages.edit_post', $data);
+        return view('admin.pages.edit_post', $data);
     }
     public function doEditPost()
     {
-        $type = Input::get('type');
-        $title = Input::get('title');
-        $body = Input::get('body');
-        $permalink = Input::get('permalink');
-        $post_id = Input::get('post_id');
-        $show_menu = Input::get('show_menu');
+        $type = Request::get('type');
+        $title = Request::get('title');
+        $body = Request::get('body');
+        $permalink = Request::get('permalink');
+        $post_id = Request::get('post_id');
+        $show_menu = Request::get('show_menu');
         if (!empty($type) && !empty($title) && !empty($body)) {
             $post = Post::find($post_id);
             $post->title = $title;
@@ -1368,12 +1404,12 @@ class Admin_SettingController extends Controller
     }
     public function deletePost()
     {
-        $post_id = Input::get('post_id');
+        $post_id = Request::get('post_id');
         $post = Post::find($post_id);
         if (isset($post->id)) {
             Post::where('id', $post_id)->delete();
             $message = $post->type." ".$post->title." ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1381,7 +1417,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message =Lang::get('messages.article_not_exist');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1392,9 +1428,9 @@ class Admin_SettingController extends Controller
 
     public function addCoinNews()
     {
-        $market_id = Input::get('market_id');
-        $title = Input::get('title');
-        $content = Input::get('content');
+        $market_id = Request::get('market_id');
+        $title = Request::get('title');
+        $content = Request::get('content');
 
         $market = Market::find($market_id);
 
@@ -1449,14 +1485,14 @@ class Admin_SettingController extends Controller
         $data['market_list'] = $market_list;
 
         $data['news'] = News::find($news_id);
-        return View::make('admin.pages.edit_coin_news', $data);
+        return view('admin.pages.edit_coin_news', $data);
     }
     public function doEditCoinNews()
     {
-        $market_id = Input::get('market_id');
-        $title = Input::get('title');
-        $content = Input::get('content');
-        $news_id = Input::get('news_id');
+        $market_id = Request::get('market_id');
+        $title = Request::get('title');
+        $content = Request::get('content');
+        $news_id = Request::get('news_id');
 
         $market = Market::find($market_id);
 
@@ -1492,12 +1528,12 @@ class Admin_SettingController extends Controller
     }
     public function deleteCoinNews()
     {
-        $news_id = Input::get('news_id');
+        $news_id = Request::get('news_id');
         $news = News::find($news_id);
         if (isset($news->id)) {
             News::where('id', $news_id)->delete();
             $message = $news->title." ".Lang::get('messages.delete_success');
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'success', 'message'=>$message ));
                 exit;
             } else {
@@ -1505,7 +1541,7 @@ class Admin_SettingController extends Controller
             }
         } else {
             $message = "Entry does not exist";
-            if (Input::get('isAjax')) {
+            if (Request::get('isAjax')) {
                 echo json_encode(array('status'=>'error', 'message'=>$message ));
                 exit;
             } else {
@@ -1516,9 +1552,9 @@ class Admin_SettingController extends Controller
 
     public function doSendCoin()
     {
-        $amount = Input::get('amount');
-        $address = Input::get('address');
-        $wallet_type =Input::get('wallet_type');
+        $amount = Request::get('amount');
+        $address = Request::get('address');
+        $wallet_type =Request::get('wallet_type');
 
         $wallet = Wallet::where('type', $wallet_type)->first();
         //echo "<pre>wallet: "; print_r($wallet->toArray()); echo "</pre>";
@@ -1568,7 +1604,7 @@ class Admin_SettingController extends Controller
         }
         if ($error) {
             $data['message_error'] = $message_error;
-            return View::make('admin.backup_restore.form_restore', $data);
+            return view('admin.backup_restore.form_restore', $data);
         } else {
             $upload_max_filesize=ini_get("upload_max_filesize");
             if (preg_match("/([0-9]+)K/i", $upload_max_filesize, $tempregs)) {
@@ -1586,7 +1622,7 @@ class Admin_SettingController extends Controller
             $data['charset'] = $charset[0]->Value;
           //echo "<pre>charset: "; print_r($charset); echo "</pre>";
         }
-        return View::make('admin.backup_restore.form_restore', $data);
+        return view('admin.backup_restore.form_restore', $data);
     }
 
     public function doRestore()
@@ -1597,7 +1633,7 @@ class Admin_SettingController extends Controller
     {
         require app_path().'/libraries/bigdump.php';
         $data['version'] = '0.35b';
-        return View::make('admin.backup_restore.backup', $data);
+        return view('admin.backup_restore.backup', $data);
     }
 
     public function doBackup()
@@ -1607,9 +1643,9 @@ class Admin_SettingController extends Controller
 
     public function addNewLimitTrade()
     {
-        $wallet_id = strtoupper(Input::get('wallet_id'));
-        $min_amount = Input::get('min_amount');
-        $max_amount = Input::get('max_amount');
+        $wallet_id = strtoupper(Request::get('wallet_id'));
+        $min_amount = Request::get('min_amount');
+        $max_amount = Request::get('max_amount');
         $find_record=WalletLimitTrade::where('wallet_id', $wallet_id)->first();
         if (!isset($find_record->wallet_id)) {
             $limitTrade=new WalletLimitTrade();
@@ -1637,13 +1673,13 @@ class Admin_SettingController extends Controller
             return Redirect::to('admin/setting/limit-trade')->with('error', Lang::get('messages.limit_trade_not_exist'));
         }
         $data['limit_trade'] = $limit_trade;
-        return View::make('admin.limittrade.edit_limittrade', $data);
+        return view('admin.limittrade.edit_limittrade', $data);
     }
     public function doEditLimitTrade()
     {
-        $wallet_id = strtoupper(Input::get('wallet_id'));
-        $min_amount = Input::get('min_amount');
-        $max_amount = Input::get('max_amount');
+        $wallet_id = strtoupper(Request::get('wallet_id'));
+        $min_amount = Request::get('min_amount');
+        $max_amount = Request::get('max_amount');
         $limitTrade=WalletLimitTrade::where('wallet_id', $wallet_id)->first();
         if (isset($limitTrade->wallet_id)) {
             $limitTrade->min_amount=$min_amount;

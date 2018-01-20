@@ -15,7 +15,7 @@
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
 
-<form class="form-horizontal" role="form" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@doEditPost') ?: URL::to('/admin/edit-post') }}}" id="add_post">	
+<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@doEditPost') ?: URL::to('/admin/edit-post') }}}" id="add_post">	
 	<div class="form-group">
 	    <p><label for="title" >{{trans('admin_texts.title')}}</label></p>
 	    <div class="col-sm-10">

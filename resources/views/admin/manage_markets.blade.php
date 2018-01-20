@@ -16,8 +16,8 @@
 	@endif
 <a href="#" id="add_market_link">{{trans('admin_texts.add_market')}}</a>
 
-<form class="form-horizontal" role="form" id="add_new_market" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addNewMarket') ?: URL::to('/admin/add-market') }}}">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_new_market" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewMarket') ?: URL::to('/admin/add-market') }}}">
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.from')}}</label>
 	    <div class="col-sm-10">
@@ -69,7 +69,7 @@
 {{ HTML::script('assets/js/jquery.validate.min.js') }}
 <script type="text/javascript">
 function deleteMarket(market_id){
-	$.post('<?php echo action('Admin_SettingController@deleteMarket')?>', {isAjax: 1, market_id: market_id }, function(response){
+	$.post('<?php echo action('admin\\AdminSettingController@deleteMarket')?>', {isAjax: 1, market_id: market_id }, function(response){
        	var obj = $.parseJSON(response);
 		var title = 'Market removal';
 		var msg ='';

@@ -16,8 +16,8 @@
 <div class="alert alert-error">{{{ $error_message }}}</div>
 @endif
 @if(!isset($not_wallet))
-<form class="form-horizontal" role="form" id="add_new_coin_vote" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addNewCoinVote') ?: URL::to('/admin/add-coin-vote') }}}">
-	<input type="hidden" name="_token" id="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_new_coin_vote" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewCoinVote') ?: URL::to('/admin/add-coin-vote') }}}">
+	<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('texts.coin_code')}}</label>
 	    <div class="col-sm-10">
@@ -88,7 +88,7 @@ function deleteCoin(coinvote_id){
       
 	$.ajax({
 		type: 'post',
-		url: '<?php echo action('Admin_SettingController@deleteCoinVote')?>',
+		url: '<?php echo action('admin\\AdminSettingController@deleteCoinVote')?>',
 		datatype: 'json',
 		data: {isAjax: 1, coinvote_id: coinvote_id },
 		beforeSend: function(request) {
@@ -115,7 +115,7 @@ function deleteCoin(coinvote_id){
 	
 	  <?php
 	  /*
-	  $.post('<?php echo action('Admin_SettingController@deleteCoinVote')?>', {isAjax: 1, coinvote_id: coinvote_id}, function(response){
+	  $.post('<?php echo action('admin\\AdminSettingController@deleteCoinVote')?>', {isAjax: 1, coinvote_id: coinvote_id}, function(response){
           var obj = $.parseJSON(response);
           console.log('obj: ',obj);
 		  	var title = 'Coin voting';

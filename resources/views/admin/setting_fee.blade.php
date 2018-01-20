@@ -18,8 +18,8 @@
 	
 	<a href="#" id="add_fee_market_link">{{trans('admin_texts.add_market_fee')}}</a>
 
-<form class="form-horizontal" role="form" id="add_fee_market" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addFeeMarket') ?: URL::to('/admin/add-fee') }}}">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_fee_market" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addFeeMarket') ?: URL::to('/admin/add-fee') }}}">
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
         <label for="fee_market_id" class="col-sm-2 control-label">Market</label>
         <div class="col-sm-10">
@@ -61,8 +61,8 @@
 
 
 	
-<form class="form-horizontal" role="form" id="edit_fee_trade" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@setFeeTrade') ?: URL::to('/admin/set-fee-trade') }}}">	
-<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="edit_fee_trade" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@setFeeTrade') ?: URL::to('/admin/set-fee-trade') }}}">	
+<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<label>{{trans('admin_texts.market')}}: <strong><span class="market_edit"></span></strong></label> 
 	<div class="form-group">
 	    <label for="buy_fee" class="col-sm-2 control-label">{{trans('admin_texts.buy_fee')}}</label>

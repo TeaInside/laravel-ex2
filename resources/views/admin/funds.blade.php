@@ -41,7 +41,7 @@ else $fee_withdraw = sprintf('%.8f',0);
 @endforeach
 
 <div id="form-withdraw">
-	<form class="form-horizontal" role="form" autocomplete=off id="form-send-coin" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@doSendCoin') ?: URL::to('/admin/send-coin') }}}">	
+	<form class="form-horizontal" role="form" autocomplete=off id="form-send-coin" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@doSendCoin') ?: URL::to('/admin/send-coin') }}}">	
 		<label class="blue"><strong>{{trans('admin_texts.withdrawal')}} <span class="coin_code"></span></strong></label> 
 		<label>{{trans('admin_texts.available_funds')}}<strong> <span class="coin_available blue"></span> <span class="coin_code"></span></strong></label>
 		<div class="form-group">

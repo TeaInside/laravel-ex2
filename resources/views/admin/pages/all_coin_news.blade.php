@@ -47,7 +47,7 @@
 <script type='text/javascript'>
 
 function deletePost(news_id){
-    $.post('<?php echo action('Admin_SettingController@deleteCoinNews')?>', {isAjax: 1, news_id: news_id }, function(response){
+    $.post('<?php echo action('admin\\AdminSettingController@deleteCoinNews')?>', {isAjax: 1, news_id: news_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){

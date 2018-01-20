@@ -30,7 +30,7 @@ These rules apply to both paid and free listings<BR>
 
 
 <form id="contactForm" method="POST" action="{{{ URL::to('page/submit-coin') }}}" accept-charset="UTF-8">
-	<input type="hidden" name="_token" id="_token" value="{{{ Session::getToken() }}}">
+	<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 	<table class="table table-striped table-hover register">
 		<tbody>
 			@if ($email == '')

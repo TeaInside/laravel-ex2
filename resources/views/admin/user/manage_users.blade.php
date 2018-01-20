@@ -16,8 +16,8 @@
 	@if ( Session::get('notice') )
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
-<form class="form-horizontal" role="form" id="add_new_user" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addNewUser') ?: URL::to('/admin/add-user') }}}">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_new_user" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewUser') ?: URL::to('/admin/add-user') }}}">
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('user_texts.fullname')}}</label>
 	    <div class="col-sm-10">
@@ -116,7 +116,7 @@
 {{ HTML::script('assets/js/jquery.validate.min.js') }}
 <script type="text/javascript">
 function deleteUser(user_id){
-	$.post('<?php echo action('Admin_SettingController@deleteUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
+	$.post('<?php echo action('admin\\AdminSettingController@deleteUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
        	var obj = $.parseJSON(response);
 	    console.log('obj: ',obj);
 	    if(obj.status == 'success'){
@@ -132,7 +132,7 @@ function deleteUser(user_id){
     return false;
 }
 function banUser(user_id){
-	$.post('<?php echo action('Admin_SettingController@banUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
+	$.post('<?php echo action('admin\\AdminSettingController@banUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
        	var obj = $.parseJSON(response);
 	    console.log('obj: ',obj);
 	    if(obj.status == 'success'){

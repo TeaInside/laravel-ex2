@@ -2,7 +2,7 @@
 @section('content')	
 {{ HTML::script('assets/js/colorPicker.js') }}
 <h2>{{trans('admin_texts.general')}}</h2>
-<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\Admin_SettingController@updateSetting') ?: ('/admin/update-setting') }}}" enctype="multipart/form-data" id="setting_general">
+<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\admin\\AdminSettingController@updateSetting') ?: ('/admin/update-setting') }}}" enctype="multipart/form-data" id="setting_general">
 	<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 	@if ( Session::get('error') )
       <div class="alert alert-error">{{{ Session::get('error') }}}</div>

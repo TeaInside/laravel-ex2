@@ -16,7 +16,7 @@
           <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
     @endif
 
-<form class="form-horizontal" role="form" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addWithdrawLimit') ?: URL::to('/admin/add-withdraw-limit') }}}" id="add_post">    
+<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addWithdrawLimit') ?: URL::to('/admin/add-withdraw-limit') }}}" id="add_post">    
     <div class="form-group">
         <label for="market_id" class="col-sm-2 control-label">Wallet</label>
         <div class="col-sm-10">

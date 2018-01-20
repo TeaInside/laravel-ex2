@@ -47,7 +47,7 @@
 <script type='text/javascript'>
 
 function deletePost(limit_id){
-    $.post('<?php echo action('Admin_SettingController@deleteWithdrawLimit')?>', {isAjax: 1, limit_id: limit_id }, function(response){
+    $.post('<?php echo action('admin\\AdminSettingController@deleteWithdrawLimit')?>', {isAjax: 1, limit_id: limit_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){

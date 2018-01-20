@@ -35,7 +35,7 @@
 </div>
 <script type='text/javascript'>
 function deletePost(post_id){
-    $.post('<?php echo action('Admin_SettingController@deletePost')?>', {isAjax: 1, post_id: post_id }, function(response){
+    $.post('<?php echo action('admin\\AdminSettingController@deletePost')?>', {isAjax: 1, post_id: post_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){

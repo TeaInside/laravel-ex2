@@ -28,7 +28,7 @@
 			</div>
 			
 			<form id="contactForm" class="login clearfix" method="POST" action="{{{ URL::to('page/contact') }}}" accept-charset="UTF-8">
-				<input type="hidden" name="_token" id="_token" value="{{{ Session::getToken() }}}">
+				<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 				<div class="form-group">
 
 						<p class="field">

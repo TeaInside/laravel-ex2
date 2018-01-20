@@ -13,8 +13,8 @@
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
 <a href="javascript:void()" id="add_limittrade_link">{{trans('admin_texts.add_limit_trade')}}</a>
-<form class="form-horizontal" role="form" id="add_limit_trade" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@setLimitTrade') ?: URL::to('/admin/add-limit-trade') }}}">	
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_limit_trade" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@setLimitTrade') ?: URL::to('/admin/add-limit-trade') }}}">	
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.wallet')}}</label>
 	    <div class="col-sm-10">

@@ -15,7 +15,7 @@
 						
 						{{ trans('user_texts.login_with_two_factor') }}
 						
-						{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::getToken()  , 'blue|white', 'button|flat' ) }}
+						{{ Clef::button( 'login', 'https://sweedx.com/two-factor-auth/login2fa' ,Session::token()  , 'blue|white', 'button|flat' ) }}
 					</div>						
 			
 			

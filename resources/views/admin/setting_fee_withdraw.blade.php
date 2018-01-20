@@ -12,7 +12,7 @@
 @if ( Session::get('notice') )
       <div class="alert">{{{ Session::get('notice') }}}</div>
 @endif
-<form class="form-horizontal" role="form" id="edit_fee_withdraw" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@setFeeWithdraw') ?: URL::to('/admin/set-fee-withdraw') }}}">	
+<form class="form-horizontal" role="form" id="edit_fee_withdraw" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@setFeeWithdraw') ?: URL::to('/admin/set-fee-withdraw') }}}">	
 	<label>{{trans('admin_texts.market')}}: <strong><span class="coin_edit"></span></strong></label> 
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.fee_withdraw')}}</label>

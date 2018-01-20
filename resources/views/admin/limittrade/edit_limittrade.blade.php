@@ -12,8 +12,8 @@
 	@if ( Session::get('notice') )
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
-<form class="form-horizontal" role="form" id="edit_limit_trade" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@doEditLimitTrade') ?: URL::to('/admin/edit-limit-trade') }}}">	
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="edit_limit_trade" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@doEditLimitTrade') ?: URL::to('/admin/edit-limit-trade') }}}">	
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.wallet')}}</label>
 	    <div class="col-sm-10">

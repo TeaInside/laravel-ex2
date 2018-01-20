@@ -17,8 +17,8 @@
 	@endif
 <a href="#" id="add_wallet_link">{{trans('admin_texts.add_wallet')}}</a>
 
-<form class="form-horizontal" role="form" id="add_new_wallet" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addNewWallet') ?: URL::to('/admin/add-wallet') }}}" enctype="multipart/form-data">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="add_new_wallet" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewWallet') ?: URL::to('/admin/add-wallet') }}}" enctype="multipart/form-data">
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.coin_code')}}</label>
 	    <div class="col-sm-10">
@@ -157,7 +157,7 @@
 
 		
 function deleteWallet(wallet_id){
-	$.post('<?php echo action('Admin_SettingController@deleteWallet')?>', {isAjax: 1, wallet_id: wallet_id }, function(response){
+	$.post('<?php echo action('admin\\AdminSettingController@deleteWallet')?>', {isAjax: 1, wallet_id: wallet_id }, function(response){
        	var obj = $.parseJSON(response);
 		var title ='Wallet removal';
 		var msg ='';

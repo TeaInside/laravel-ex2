@@ -13,8 +13,8 @@
 	@if ( Session::get('notice') )
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
-<form class="form-horizontal" role="form" id="edit_wallet" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@doEditWallet') ?: URL::to('/admin/edit-wallet') }}}" enctype="multipart/form-data">
-	<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+<form class="form-horizontal" role="form" id="edit_wallet" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@doEditWallet') ?: URL::to('/admin/edit-wallet') }}}" enctype="multipart/form-data">
+	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.coin_code')}}</label>
 	    <div class="col-sm-10">

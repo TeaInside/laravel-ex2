@@ -54,7 +54,7 @@ function deletePost(giveaway_id){
 	
 		$.ajax({
 			type: 'post',
-			url: '<?php echo action('Admin_SettingController@deleteCoinGiveaway')?>',
+			url: '<?php echo action('admin\\AdminSettingController@deleteCoinGiveaway')?>',
 			datatype: 'json',
 			data: {isAjax: 1, giveaway_id: giveaway_id },
 			beforeSend: function(request) {
@@ -83,7 +83,7 @@ function deletePost(giveaway_id){
 			}
 		});
 	/*
-    $.post('<?php echo action('Admin_SettingController@deleteCoinGiveaway')?>', {isAjax: 1, giveaway_id: giveaway_id }, function(response){
+    $.post('<?php echo action('admin\\AdminSettingController@deleteCoinGiveaway')?>', {isAjax: 1, giveaway_id: giveaway_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){

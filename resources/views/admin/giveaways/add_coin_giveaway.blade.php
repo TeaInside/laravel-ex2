@@ -15,9 +15,9 @@
           <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
     @endif
 
-<form class="form-horizontal" role="form" method="POST" action="{{{ Confide::checkAction('Admin_SettingController@addCoinGiveaway') ?: URL::to('/admin/add-coin-giveaway') }}}" id="add_post">    
+<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addCoinGiveaway') ?: URL::to('/admin/add-coin-giveaway') }}}" id="add_post">    
     <div class="form-group">
-		<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+		<input type="hidden" name="_token" value="{{{ Session::token() }}}">
         <label for="market_id" class="col-sm-2 control-label">Wallet</label>
         <div class="col-sm-10">
             <select class="form-control" name="wallet_id" id="wallet_id">

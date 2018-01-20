@@ -1,5 +1,5 @@
-@extends('layouts.login')
-@section('content')
+<!-- @ extends('layouts.login') -->
+<!-- @ section('content') -->
 
 		<div id="contentinner">
 					
@@ -41,4 +41,4 @@
 		*/
 		?>
 		</div>
-@stop
+<!-- @ stop -->

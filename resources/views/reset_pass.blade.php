@@ -13,9 +13,9 @@
 			<span >{{trans('frontend_texts.reset_pass')}}</span>
 		</div>
 		
-		<form method="POST" action="{{{ (Confide::checkAction('UserController@do_reset_password'))    ?: URL::to('/user/reset') }}}" accept-charset="UTF-8" class="reset_pas login clearfix">
+		<form method="POST" action="{{{ (Auth::check('UserController@do_reset_password'))    ?: URL::to('/user/reset') }}}" accept-charset="UTF-8" class="reset_pas login clearfix">
 			<input type="hidden" name="token" value="{{{ $token }}}">
-			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
+			<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 			
 			<table class="register">
 			<tbody>
