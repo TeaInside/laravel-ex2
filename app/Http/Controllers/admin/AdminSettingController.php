@@ -831,8 +831,8 @@ class AdminSettingController extends Controller
             $giveaways->wallet_id = $wallet_id;
             $giveaways->wallet_type = $wallet_type;
             $giveaways->wallet_name = $wallet_name;
-            $giveaways->save();
-            if ($giveaways->id) {
+            $giveaways->time_interval = $time_interval;
+            if ($giveaways->save()) {
                 return Redirect::to('admin/manage/coin-giveaways')->with('success', Lang::get('messages.updated_success_param', array('object'=>'Coin Giveaway')));
             } else {
                 return Redirect::to('admin/manage/coin-giveaways')->with('error', $error);

@@ -23,7 +23,7 @@
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.coin_code')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" required="" name="type" id="type" value="{{{ Input::old('type') }}}">
+			  <input type="text" class="form-control" required="" name="type" id="type" value="{{{ Request::old('type') }}}">
 			</div>	      	      
 	    </div>
 	</div>	
@@ -31,7 +31,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{trans('admin_texts.coin_name')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" name="name" id="name" required="" class="form-control" value="{{{ Input::old('name') }}}">
+			  <input type="text" name="name" id="name" required="" class="form-control" value="{{{ Request::old('name') }}}">
 			</div>	      
 	    </div>
 	</div>
@@ -39,7 +39,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{trans('admin_texts.wallet_username')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input minlength="2" type="text" required="" class="form-control" name="wallet_username" id="wallet_username" value="{{{ Input::old('wallet_username') }}}">			  
+			  <input minlength="2" type="text" required="" class="form-control" name="wallet_username" id="wallet_username" value="{{{ Request::old('wallet_username') }}}">			  
 			</div>
 	    </div>
 	</div>

@@ -3,7 +3,7 @@
 <!-- {{HTML::style('assets/css/bootstrap-combined.min.css')}} -->
 {{ HTML::script('assets/js/bootstrap-paginator.js') }}
 <h2>{{trans('admin_texts.manage_users')}}</h2>
-<a href="javascript:void()" id="add_user_link">{{trans('admin_texts.add_user')}}</a>
+<a href="#" id="add_user_link">{{trans('admin_texts.add_user')}}</a>
 	@if ( is_array(Session::get('error')) )
         <div class="alert alert-error">{{ head(Session::get('error')) }}</div>
 	@elseif ( Session::get('error') )
@@ -22,7 +22,7 @@
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('user_texts.fullname')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" name="fullname" id="fullname" value="{{{ Input::old('fullname') }}}">
+			  <input type="text" class="form-control" name="fullname" id="fullname" value="{{{ Request::old('fullname') }}}">
 			</div>	      	      
 	    </div>
 	</div>	
@@ -30,7 +30,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{{ Lang::get('confide::confide.e_mail') }}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" name="email" id="email" required="" class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" value="{{{ Input::old('email') }}}">
+			  <input type="text" name="email" id="email" required="" class="form-control" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" value="{{{ Request::old('email') }}}">
 			</div>	      
 	    </div>
 	</div>
@@ -38,7 +38,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{{ Lang::get('confide::confide.username') }}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input minlength="2" type="text" required="" class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" name="username" id="username" value="{{{ Input::old('username') }}}">			  
+			  <input minlength="2" type="text" required="" class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" name="username" id="username" value="{{{ Request::old('username') }}}">			  
 			</div>
 	    </div>
 	</div>
@@ -100,7 +100,7 @@
 				<?php $i++; ?>
 			@endforeach
 		</td>
-		<td><a href="{{URL::to('admin/edit-user')}}/{{$user['id']}}" class="edit_page">{{trans('admin_texts.edit')}}</a>  | <a href="javascript:void()" onclick="deleteUser({{$user['id']}})" class="delete_page">{{trans('admin_texts.delete')}}</a>  | <a href="javascript:void()" onclick="banUser({{$user['id']}})" class="ban_user">{{trans('admin_texts.ban_user')}}</a></td>
+		<td><a href="{{URL::to('admin/edit-user')}}/{{$user['id']}}" class="edit_page">{{trans('admin_texts.edit')}}</a>  | <a href="javascript:void(0);" onclick="deleteUser({{$user['id']}})" class="delete_page">{{trans('admin_texts.delete')}}</a>  | <a href="javascript:void(0);" onclick="banUser({{$user['id']}})" class="ban_user">{{trans('admin_texts.ban_user')}}</a></td>
 	</tr>
 	@endforeach
 	
@@ -116,7 +116,7 @@
 {{ HTML::script('assets/js/jquery.validate.min.js') }}
 <script type="text/javascript">
 function deleteUser(user_id){
-	$.post('<?php echo action('admin\\AdminSettingController@deleteUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
+	$.post('/delete-user', {isAjax: 1, user_id: user_id }, function(response){
        	var obj = $.parseJSON(response);
 	    console.log('obj: ',obj);
 	    if(obj.status == 'success'){
@@ -132,7 +132,7 @@ function deleteUser(user_id){
     return false;
 }
 function banUser(user_id){
-	$.post('<?php echo action('admin\\AdminSettingController@banUSer')?>', {isAjax: 1, user_id: user_id }, function(response){
+	$.post('/ban-user', {isAjax: 1, user_id: user_id }, function(response){
        	var obj = $.parseJSON(response);
 	    console.log('obj: ',obj);
 	    if(obj.status == 'success'){

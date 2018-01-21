@@ -36,20 +36,20 @@ These rules apply to both paid and free listings<BR>
 			@if ($email == '')
 			<tr>
 				<th style="width:180px;">Email Address <small>Required</small></th>
-				<td><input minlength="2" type="email" required="" name="email" id="email" value="{{{ Input::old('email') }}}"></td>
+				<td><input minlength="2" type="email" required="" name="email" id="email" value="{{{ Request::old('email') }}}"></td>
 			</tr>
 			@endif
 			<tr>
 				<th style="width:180px;">Name of coin <small>Required</small></th>
-				<td><input minlength="2" type="text" required="" name="coin_name" id="coin_name" value="{{{ Input::old('coin_name') }}}"></td>
+				<td><input minlength="2" type="text" required="" name="coin_name" id="coin_name" value="{{{ Request::old('coin_name') }}}"></td>
 			</tr>
 			<tr>
 				<th style="width:180px;">3 digit Ticker <small>Required</small></th>
-				<td><input maxlength="3" type="text" required="" name="coin_ticker" id="coin_ticker" value="{{{ Input::old('coin_ticker') }}}"></td>
+				<td><input maxlength="3" type="text" required="" name="coin_ticker" id="coin_ticker" value="{{{ Request::old('coin_ticker') }}}"></td>
 			</tr>
 			<tr>
 				<th style="width:180px;">Forum Thread <small>Required</small></th>
-				<td><input type="text" required="" name="coin_thread" id="coin_thread" value="{{{ Input::old('coin_thread') }}}"></td>
+				<td><input type="text" required="" name="coin_thread" id="coin_thread" value="{{{ Request::old('coin_thread') }}}"></td>
 			</tr>
 			<tr>
 				<th style="width:180px;">Are you the Developer?</th>
@@ -65,7 +65,7 @@ These rules apply to both paid and free listings<BR>
 			</tr>
 			<tr>
 				<th>Comments</th>
-				<td><textarea name="comments" id="comments" class="form-control">{{{ Input::old('comments') }}}</textarea><br>
+				<td><textarea name="comments" id="comments" class="form-control">{{{ Request::old('comments') }}}</textarea><br>
 					<span>Plain text only, any HTML codes will be striped</span>
 				</td>
 			</tr>

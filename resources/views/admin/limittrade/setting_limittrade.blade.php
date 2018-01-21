@@ -21,7 +21,7 @@
 	    	<div class="input-append">
 			  <select name="wallet_id">
 			  	@foreach($wallets as $wallet)
-			  		<option value="{{$wallet->id}}" @if(Input::old('wallet_id')==$wallet->id) selected @endif>{{$wallet->name}}</option>
+			  		<option value="{{$wallet->id}}" @if(Request::old('wallet_id')==$wallet->id) selected @endif>{{$wallet->name}}</option>
 			  	@endforeach
 			  </select>			  
 			</div>	      	      
@@ -31,7 +31,7 @@
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.min_amount')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" name="min_amount" id="min_amount" value="{{{ Input::old('min_amount') }}}">			  
+			  <input type="text" class="form-control" name="min_amount" id="min_amount" value="{{{ Request::old('min_amount') }}}">			  
 			</div>	      	      
 	    </div>
 	</div>	
@@ -39,7 +39,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{trans('admin_texts.max_amount')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" id="max_amount" name="max_amount" value="{{{ Input::old('max_amount') }}}">			  
+			  <input type="text" class="form-control" id="max_amount" name="max_amount" value="{{{ Request::old('max_amount') }}}">			  
 			</div>	      
 	    </div>
 	</div>

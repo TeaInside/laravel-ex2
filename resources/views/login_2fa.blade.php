@@ -22,7 +22,7 @@
 				<div class="form-group">
 				  <input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 						<p class="field">
-							<input type="text" tabindex="1" name="email" id="email" placeholder="{{{ Lang::get('confide::confide.username') }}}" value="{{{ Input::old('email') }}}" />
+							<input type="text" tabindex="1" name="email" id="email" placeholder="{{{ Lang::get('confide::confide.username') }}}" value="{{{ Request::old('email') }}}" />
 							<i class="icon-user icon-large"></i>
 						</p>
 						<p class="field">

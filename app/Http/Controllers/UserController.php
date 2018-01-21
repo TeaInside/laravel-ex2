@@ -99,7 +99,11 @@ class UserController extends Controller
         if ($referral!='') {
             $data['referral'] =$referral;
         }
-        return view(Config::get('confide::signup_form'), $data);
+        return view(
+            //Config::get('confide::signup_form')
+            'register'
+            ,$data
+        );
     }
 
     public function register()

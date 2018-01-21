@@ -16,13 +16,13 @@
 <div class="alert alert-error">{{{ $error_message }}}</div>
 @endif
 @if(!isset($not_wallet))
-<form class="form-horizontal" role="form" id="add_new_coin_vote" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewCoinVote') ?: URL::to('/admin/add-coin-vote') }}}">
+<form class="form-horizontal" role="form" id="add_new_coin_vote" method="POST" action="/admin/add-coin-vote">
 	<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('texts.coin_code')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" name="code" id="code" value="{{{ Input::old('code') }}}">
+			  <input type="text" class="form-control" name="code" id="code" value="{{{ Request::old('code') }}}">
 			</div>	      	      
 	    </div>
 	</div>	
@@ -30,7 +30,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{trans('texts.coin_name')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" id="name" name="name" value="{{{ Input::old('name') }}}">
+			  <input type="text" class="form-control" id="name" name="name" value="{{{ Request::old('name') }}}">
 			</div>	      
 	    </div>
 	</div>
@@ -38,7 +38,7 @@
 	    <label for="inputPassword3" class="col-sm-2 control-label">{{trans('texts.btc_payment_address')}}</label>
 	    <div class="col-sm-10">
 	    	<div class="input-append">
-			  <input type="text" class="form-control" id="btc_address" name="btc_address" value="{{{ Input::old('btc_address') }}}">			  
+			  <input type="text" class="form-control" id="btc_address" name="btc_address" value="{{{ Request::old('btc_address') }}}">			  
 			</div>	      
 			<br><em>Please enter a address is dedicated to this coin to check vote by payment</em>
 	    </div>
@@ -88,7 +88,7 @@ function deleteCoin(coinvote_id){
       
 	$.ajax({
 		type: 'post',
-		url: '<?php echo action('admin\\AdminSettingController@deleteCoinVote')?>',
+		url: '/admin/delete-coin-vote',
 		datatype: 'json',
 		data: {isAjax: 1, coinvote_id: coinvote_id },
 		beforeSend: function(request) {

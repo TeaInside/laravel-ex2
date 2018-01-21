@@ -45,12 +45,14 @@ array_walk($q, function ($q) {
 		[
 			'Admin_SettingController',
 			'Session::getToken()',
-			'Confide::checkAction'
+			'Confide::checkAction',
+			'Input::'
 		],
 		[
 			'admin\\\\AdminSettingController',
 			'Session::token()',
-			'Auth::check'
+			'Auth::check',
+			'Request::'
 		],
 		file_get_contents($q),
 		$n

@@ -16,8 +16,9 @@
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
 
-<form class="form-horizontal" role="form" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewPost') ?: URL::to('/admin/add-post') }}}" id="add_post">	
+<form class="form-horizontal" role="form" method="POST" action="/admin/add-post" id="add_post">	
 	<div class="form-group">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.title')}}</label>
 	    <div class="col-sm-10">
 	      <input type="text" class="form-control" name="title" id="title">	      

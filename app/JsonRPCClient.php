@@ -138,7 +138,16 @@ class JsonRPCClient {
                 $response = curl_exec($ch);
                 if($response === false)
                 {
+                    try {
                         throw new Exception('Unable to connect to '.$this->url);
+                    } catch (Exception $e) {
+                        print "Error: ".$e->getMessage();
+                        if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] != "") {
+                            print "<br>";
+                            print "<a style=\"color:blue;\" href=\"".htmlspecialchars($_SERVER['HTTP_REFERER'])."\">Back to previous page</a>";
+                        }
+                        die;
+                    }
                 }
                         
                 $this->debug && $this->debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";

@@ -32,11 +32,11 @@
 				<div class="form-group">
 
 						<p class="field">
-							<input type="text" tabindex="1" name="email" id="email" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" value="{{{ Input::old('email') }}}" />
+							<input type="text" tabindex="1" name="email" id="email" placeholder="{{{ Lang::get('confide::confide.e_mail') }}}" value="{{{ Request::old('email') }}}" />
 							<i class="icon-envelope icon-large"></i>
 						</p>
 						<p class="field">
-							<textarea tabindex="2" name="message" id="message" placeholder="Message" value="{{{ Input::old('message') }}}" ></textarea>
+							<textarea tabindex="2" name="message" id="message" placeholder="Message" value="{{{ Request::old('message') }}}" ></textarea>
 							<i class="icon-envelope icon-large"></i>
 						</p>
 						

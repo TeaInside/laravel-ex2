@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use DB;
+use Confide;
 use App\JsonRPCClient;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+
+//$user = Confide::user();
+//var_dump($user->id);die;
 
 class Wallet extends Eloquent
 {
@@ -23,6 +27,7 @@ class Wallet extends Eloquent
 
     public function connectJsonRPCclient($wallet_username, $wallet_password, $wallet_ip, $port)
     {
+
         $this->jsonRPCclient = new JsonRPCClient('http://' . $wallet_username . ':' .$wallet_password . '@' . $wallet_ip . ':' . $port.'/');
 
         //new jsonRPCClient('http://thuynguyenrpc:FDGFGFHGJHJKMSDKKGHJGFHGCXCKLHKGHGJHMNMBN@127.0.0.1:8332/'); //
