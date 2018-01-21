@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Lang;
+use Hash;
 use Mail;
 use Config;
 use Confide;
@@ -573,7 +574,7 @@ class UserController extends Controller
         }
 
         User::where('id', $user->id)->update($update);
-        return Redirect::action('UserController@viewProfile')
+        return Redirect::to('/user/profile')
                             ->with('notice', "Profile updated successfully.");
     }
 
