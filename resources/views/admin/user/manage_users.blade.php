@@ -116,7 +116,7 @@
 {{ HTML::script('assets/js/jquery.validate.min.js') }}
 <script type="text/javascript">
 function deleteUser(user_id){
-	$.post('/delete-user', {isAjax: 1, user_id: user_id }, function(response){
+	$.post('/admin/delete-user', {isAjax: 1, user_id: user_id }, function(response){
        	var obj = $.parseJSON(response);
 	    console.log('obj: ',obj);
 	    if(obj.status == 'success'){
@@ -132,19 +132,24 @@ function deleteUser(user_id){
     return false;
 }
 function banUser(user_id){
-	$.post('/ban-user', {isAjax: 1, user_id: user_id }, function(response){
-       	var obj = $.parseJSON(response);
-	    console.log('obj: ',obj);
-	    if(obj.status == 'success'){
-            $('#messageModal .modal-body').html('<p style="color:#008B5D; font-weight:bold;text-align:center;">'+obj.message+'</p>');            
-            $('#messageModal').on('hidden.bs.modal', function (e) {              
-              location.reload();
-            });
-        }else{
-            $('#messageModal .modal-body').html('<p style="color:red; font-weight:bold;text-align:center;">'+obj.message+'</p>');
-        }
-        $('#messageModal').modal({show:true, keyboard:false}); 
-    });
+	try {
+		$.post('/admin/ban-user', {isAjax: 1, user_id: user_id }, function(response){
+	       	var obj = $.parseJSON(response);
+
+		    console.log('obj: ',obj);
+		    if(obj.status == 'success'){
+	            $('#messageModal .modal-body').html('<p style="color:#008B5D; font-weight:bold;text-align:center;">'+obj.message+'</p>');            
+	            $('#messageModal').on('hidden.bs.modal', function (e) {              
+	              location.reload();
+	            });
+	        }else{
+	            $('#messageModal .modal-body').html('<p style="color:red; font-weight:bold;text-align:center;">'+obj.message+'</p>');
+	        }
+	        $('#messageModal').modal({show:true, keyboard:false}); 
+	    });
+	} catch (e) {
+		alert(e.message);
+	}
     return false;
 }
     $(document).ready(function() {

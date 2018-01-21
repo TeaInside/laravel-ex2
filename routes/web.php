@@ -75,7 +75,7 @@ Route::group(array('before' => array('auth','admin'),'prefix' => 'admin'), funct
     Route::post('delete-wallet', 'admin\\AdminSettingController@deleteWallet');
 
     Route::post('delete-user', 'admin\\AdminSettingController@deleteUser');
-    Route::post('ban-user', 'admin\\AdminSettingController@banUser');
+    Route::post('ban-user', 'admin\\AdminSettingController@banUSer');
 
     Route::get('edit-user/{user_id}', 'admin\\AdminSettingController@editUser');
     Route::post('edit-user/{user_id}', 'admin\\AdminSettingController@doEditUser');
