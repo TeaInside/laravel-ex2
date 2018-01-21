@@ -19,7 +19,7 @@
 					{{ Session::get('notice') }}
 				</div>
 			@endif   
-			<form id="registerForm" method="POST" action="{{{ Auth::check('UserController@updateSetting') ?: URL::to('/user/update-setting') }}}">    
+			<form id="registerForm" method="POST" action="{{{'/user/update-setting'}}}">    
 			<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 			<h3>Your Details</h3>
 			<table class="table table-striped register">
