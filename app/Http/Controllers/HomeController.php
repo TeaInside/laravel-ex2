@@ -219,28 +219,29 @@ class HomeController extends Controller
             $market_change = $trade->calMarketChange($market_prices_opening_price, $market_current_price);
             
             
-            
-            $all_markets[] = array(
-                'latest_price' => $market_current_price,
-                'from' => $wallets[$m->wallet_from]->type,
-                'to' => $wallets[$m->wallet_to]->type,
-                'from_name' => $wallets[$m->wallet_from]->name,
-                'to_name' => $wallets[$m->wallet_to]->name,
-                'logo' => $wallets[$m->wallet_from]->logo_coin,
-                'market' => $m,
-                'prices' => $market_prices,
-                //'prices' => $market_prices['get_prices'],
-                //'prices' => $market_prices_opening_price,
-                'volume' => floatval($market_prices_volume),
-                'market_change' => $market_change,
-                'enable_trading' => $wallets[$m->wallet_from]->enable_trading
-                
-                /*,
-				'pool-url' => $wallets[$m->wallet_from]->url,
-				'blockviewer' => $wallets[$m->wallet_from]->blockviewer,
-				'forum' => $wallets[$m->wallet_from]->forum,
-				*/
-            );
+            if (isset($wallets[$m->wallet_from]->type)) {
+                $all_markets[] = array(
+                    'latest_price' => $market_current_price,
+                    'from' => $wallets[$m->wallet_from]->type,
+                    'to' => $wallets[$m->wallet_to]->type,
+                    'from_name' => $wallets[$m->wallet_from]->name,
+                    'to_name' => $wallets[$m->wallet_to]->name,
+                    'logo' => $wallets[$m->wallet_from]->logo_coin,
+                    'market' => $m,
+                    'prices' => $market_prices,
+                    //'prices' => $market_prices['get_prices'],
+                    //'prices' => $market_prices_opening_price,
+                    'volume' => floatval($market_prices_volume),
+                    'market_change' => $market_change,
+                    'enable_trading' => $wallets[$m->wallet_from]->enable_trading
+                    
+                    /*,
+    				'pool-url' => $wallets[$m->wallet_from]->url,
+    				'blockviewer' => $wallets[$m->wallet_from]->blockviewer,
+    				'forum' => $wallets[$m->wallet_from]->forum,
+    				*/
+                );
+            }
         }
                             
         //var_dump($all_markets);

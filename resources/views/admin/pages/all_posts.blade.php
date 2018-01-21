@@ -22,7 +22,7 @@
 	 	<th>{{trans('admin_texts.action')}}</th>
 	</tr> 	
 	@foreach($posts as $post)
-		<tr><td>{{$post->id}}</td><td><a href="{{URL::to('post')}}/{{$post->permalink}}" target="_blank">{{$post->title}}</a></td><td><a href="{{URL::to('admin/edit-post')}}/{{$post->id}}" class="edit_page">{{trans('admin_texts.edit')}}</a>  | <a href="javascript:void()" onclick="deletePost({{$post->id}})" class="delete_page">{{trans('admin_texts.delete')}}</a></td></tr>
+		<tr><td>{{$post->id}}</td><td><a href="{{URL::to('post')}}/{{$post->permalink}}" target="_blank">{{$post->title}}</a></td><td><a href="{{URL::to('admin/edit-post')}}/{{$post->id}}" class="edit_page">{{trans('admin_texts.edit')}}</a>  | <a href="javascript:void(0);" onclick="deletePost({{$post->id}})" class="delete_page">{{trans('admin_texts.delete')}}</a></td></tr>
 	@endforeach
 </table>
 <div id="pager"></div>
@@ -35,7 +35,7 @@
 </div>
 <script type='text/javascript'>
 function deletePost(post_id){
-    $.post('<?php echo action('admin\\AdminSettingController@deletePost')?>', {isAjax: 1, post_id: post_id }, function(response){
+    $.post('/admin/delete-post', {isAjax: 1, post_id: post_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){
@@ -55,7 +55,7 @@ function deletePost(post_id){
         totalPages: <?php echo $total_pages ?>,
         alignment:'right',
         pageUrl: function(type, page, current){
-        	return "<?php echo URL::to('admin/content/all-news'); ?>"+'/'+page; 
+        	return "/admin/content/all-news/"+page; 
         }
     }
     $('#pager').bootstrapPaginator(options);

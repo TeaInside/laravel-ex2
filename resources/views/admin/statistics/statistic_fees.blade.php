@@ -27,7 +27,9 @@
 	//exit();
 	if (count($fees_maincoin) > 0){?>
 		@foreach($fees_maincoin as $fee)
-		<tr><td><strong>{{$wallets[$fee->wallet_to]->type}}</strong></td><td>{{$wallets[$fee->wallet_to]->name}}</td><td>0</td><td>{{$fee->fee_sell}}</td><td><strong>{{$fee->fee_sell}} {{$wallets[$fee->wallet_to]->type}}</strong></td></tr>
+		@if(isset($wallets[$fee->wallet_to]->type))
+			<tr><td><strong>{{$wallets[$fee->wallet_to]->type}}</strong></td><td>{{$wallets[$fee->wallet_to]->name}}</td><td>0</td><td>{{$fee->fee_sell}}</td><td><strong>{{$fee->fee_sell}} {{$wallets[$fee->wallet_to]->type}}</strong></td></tr>
+		@endif
 		@endforeach	
 	<?php
 	}
@@ -47,8 +49,10 @@
 	//exit();
 	if (count($fees) > 0){?>
 		@foreach($fees as $fee)
+		@if(isset($wallets[$fee->wallet_from]->type))
 		<tr><td><strong>{{$wallets[$fee->wallet_from]->type}}</strong></td><td>{{$wallets[$fee->wallet_from]->name}}</td><td>0</td><td>{{$fee->fee_buy}}</td><td><strong>{{$fee->fee_buy}} {{$wallets[$fee->wallet_to]->type}}</strong></td></tr>
 		<?php /* <tr><td><strong>{{$wallets[$fee->wallet_from]->type}}</strong></td><td>{{$wallets[$fee->wallet_from]->name}}</td><td>0</td><td>{{$fee->fee_buy}}</td><td><strong>{{$fee->fee_buy}} {{$wallets[$fee->wallet_from]->type}}</strong></td></tr> */?>
+		@endif
 		@endforeach	
 	<?php
 	}

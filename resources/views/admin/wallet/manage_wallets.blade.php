@@ -17,7 +17,7 @@
 	@endif
 <a href="#" id="add_wallet_link">{{trans('admin_texts.add_wallet')}}</a>
 
-<form class="form-horizontal" role="form" id="add_new_wallet" method="POST" action="{{{ Auth::check('admin\\AdminSettingController@addNewWallet') ?: URL::to('/admin/add-wallet') }}}" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" id="add_new_wallet" method="POST" action="/admin/add-wallet" enctype="multipart/form-data">
 	<input type="hidden" name="_token" value="{{{ Session::token() }}}">
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">{{trans('admin_texts.coin_code')}}</label>
@@ -157,7 +157,7 @@
 
 		
 function deleteWallet(wallet_id){
-	$.post('<?php echo action('admin\\AdminSettingController@deleteWallet')?>', {isAjax: 1, wallet_id: wallet_id }, function(response){
+	$.post('/admin/delete-wallet', {isAjax: 1, wallet_id: wallet_id }, function(response){
        	var obj = $.parseJSON(response);
 		var title ='Wallet removal';
 		var msg ='';
@@ -221,7 +221,7 @@ function deleteWallet(wallet_id){
         totalPages: <?php echo $total_pages ?>,
         alignment:'right',
         pageUrl: function(type, page, current){
-        	return "<?php echo URL::to('admin/manage/wallets'); ?>"+'/'+page; 
+        	return "<?php echo '/admin/manage/wallets'; ?>"+'/'+page; 
         }
     }
     $('#pager').bootstrapPaginator(options);

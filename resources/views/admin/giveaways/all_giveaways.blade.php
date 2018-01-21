@@ -54,7 +54,7 @@ function deletePost(giveaway_id){
 	
 		$.ajax({
 			type: 'post',
-			url: '<?php echo action('admin\\AdminSettingController@deleteCoinGiveaway')?>',
+			url: '/admin/delete-coin-giveaway',
 			datatype: 'json',
 			data: {isAjax: 1, giveaway_id: giveaway_id },
 			beforeSend: function(request) {
@@ -104,7 +104,7 @@ function deletePost(giveaway_id){
         totalPages: <?php echo $total_pages ?>,
         alignment:'right',
         pageUrl: function(type, page, current){
-        	return "<?php echo URL::to('admin/content/all-news'); ?>"+'/'+page; 
+        	return "/admin/content/all-news/"+page; 
         }
     }
     $('#pager').bootstrapPaginator(options);

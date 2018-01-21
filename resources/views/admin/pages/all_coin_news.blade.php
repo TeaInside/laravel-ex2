@@ -47,7 +47,7 @@
 <script type='text/javascript'>
 
 function deletePost(news_id){
-    $.post('<?php echo action('admin\\AdminSettingController@deleteCoinNews')?>', {isAjax: 1, news_id: news_id }, function(response){
+    $.post('/admin/delete-coin-news', {isAjax: 1, news_id: news_id }, function(response){
         var obj = $.parseJSON(response);
         console.log('obj: ',obj);
         if(obj.status == 'success'){
@@ -71,7 +71,7 @@ function deletePost(news_id){
         totalPages: <?php echo $total_pages ?>,
         alignment:'right',
         pageUrl: function(type, page, current){
-        	return "<?php echo URL::to('admin/content/all-news'); ?>"+'/'+page; 
+        	return "<?php echo '/admin/content/all-news'; ?>"+'/'+page; 
         }
     }
     $('#pager').bootstrapPaginator(options);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use DB;
+use Hash;
 use Lang;
 use Config;
 use Request;
@@ -1693,5 +1694,23 @@ class AdminSettingController extends Controller
         } else {
             return Redirect::to('admin/setting/limit-trade')->with('error', Lang::get('messages.limit_trade_not_exist'));
         }
+    }
+
+    public function addFee()
+    {
+        $re = Request::except('_token');
+        try {
+            $a = FeeTrade::insert(
+                [
+                    "fee_sell" => (double) $re['add_sell_fee'],
+                    "fee_buy" => (double) $re['add_buy_fee'],
+                    "market_id" => (int)$re['fee_market_id']
+                ]
+            );
+        } catch (\Exception $e) {
+            preg_match('/Duplicate entry (.*) for key \'market_id\'/i', $e->getMessage(), $n);
+            return Redirect::to('/admin/setting/fee')->with('error', $n[0]);
+        }
+        return Redirect::to('/admin/setting/fee')->with('success', 'Success');
     }
 }

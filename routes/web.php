@@ -79,6 +79,7 @@ Route::group(array('before' => array('auth','admin'),'prefix' => 'admin'), funct
 
     Route::get('edit-user/{user_id}', 'admin\\AdminSettingController@editUser');
     Route::post('edit-user/{user_id}', 'admin\\AdminSettingController@doEditUser');
+    Route::post('edit-user', 'admin\\AdminSettingController@doEditUser');
     // Route::post('')
 
     //market
@@ -131,6 +132,8 @@ Route::group(array('before' => array('auth','admin'),'prefix' => 'admin'), funct
     Route::post('add-coin-vote', 'admin\\AdminSettingController@addNewCoinVote');
 
     Route::post('add-post', 'admin\\AdminSettingController@addNewPost');
+
+    Route::post('add-fee', 'admin\\AdminSettingController@addFee');
 });
 // Confide routes
 Route::get( 'referral/{referral}',                 'UserController@create');
