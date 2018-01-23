@@ -20,9 +20,6 @@
 						<li>{{ HTML::link('admin/setting/fee-withdraw', trans('admin_texts.fee_withdraw')) }}</li>
 					</ul>
 				</li>
-                <li>
-                    {{ HTML::link('admin/pool', trans('admin_texts.additional_coin_info')) }}
-                </li>
 			</ul>
 		</li>
 		<li>
