@@ -20,6 +20,11 @@
 	      <div class="alert">{{{ Session::get('notice') }}}</div>
 	@endif
 @foreach($wallets as $wallet)
+
+@if(isset($error_)) 
+<div class="alert alert-error">{{ $error_ }}</div>
+@endif
+
 <?php 
 if(isset($balances[$wallet->id])) 
 	$balance = sprintf('%.8f',$balances[$wallet->id]); 

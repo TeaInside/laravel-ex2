@@ -131,6 +131,8 @@ class JsonRPCClient {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
                 
                 if (curl_errno($ch)) {
                     throw new Exception('JSON-RPC Error: %s.', curl_error($ch));
@@ -138,16 +140,16 @@ class JsonRPCClient {
                 $response = curl_exec($ch);
                 if($response === false)
                 {
-                    try {
+                    /*try {*/
                         throw new Exception('Unable to connect to '.$this->url);
-                    } catch (Exception $e) {
+                   /* } catch (Exception $e) {
                         print "Error: ".$e->getMessage();
                         if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] != "") {
                             print "<br>";
                             print "<a style=\"color:blue;\" href=\"".htmlspecialchars($_SERVER['HTTP_REFERER'])."\">Back to previous page</a>";
                         }
                         die;
-                    }
+                    }*/
                 }
                         
                 $this->debug && $this->debug.='***** Server response *****'."\n".$response.'***** End of server response *****'."\n";

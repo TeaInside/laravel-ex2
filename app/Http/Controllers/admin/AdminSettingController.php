@@ -8,6 +8,7 @@ use Lang;
 use Config;
 use Request;
 use Redirect;
+use Exception;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\Role;
@@ -491,7 +492,7 @@ class AdminSettingController extends Controller
                             $coinvotes[$key]->num_vote = $num_vote + $num_payment;
                         }
                     } catch (Exception $e) {
-                        $data['error_message']= "Caught exception 1 - ASC";
+                        //$data['error_message']= "Caught exception 1 - ASC";
                         //'Caught exception: '.$e->getMessage()."\n";  //
                     }
                      
@@ -513,13 +514,19 @@ class AdminSettingController extends Controller
                     try {
                         if ($check_wallet_id != $wallet->id) {
                             $check_wallet_id = $wallet->id;
-                            $wallet->connectJsonRPCclient($wallet->wallet_username, $wallet->wallet_password, $wallet->wallet_ip, $wallet->port);
-                            $balances[$wallet->id] = $wallet->getBalance();
-                            $fee_withdraws[$wallet->id] = $wallet->getTxFee();
-                            UserAddressDeposit::insert(array('user_id' => $user->id, 'wallet_id' => $wallet->id, 'addr_deposit'=>$address));
+                            try {
+
+                                $wallet->connectJsonRPCclient($wallet->wallet_username, $wallet->wallet_password, $wallet->wallet_ip, $wallet->port);
+                                $balances[$wallet->id] = $wallet->getBalance();
+                                $fee_withdraws[$wallet->id] = $wallet->getTxFee();
+                                UserAddressDeposit::insert(array('user_id' => $user->id, 'wallet_id' => $wallet->id, 'addr_deposit'=>$address));        
+                            } catch (Exception $e) {
+                                $data['error_'] = "Unable to connect";
+                            }
                         }
+                        throw new Exception("Error Processing Request", 1);
+                        
                     } catch (Exception $e) {
-                        $data['error_message']= 'Caught exception 2 - ASC: ';
                         //"Not connect to this wallet";//'Caught exception: '.$e->getMessage()."\n";
                     }
                 }
