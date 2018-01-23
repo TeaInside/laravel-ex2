@@ -574,7 +574,7 @@ class UserController extends Controller
         }
 
         User::where('id', $user->id)->update($update);
-        return Redirect::to('/user/profile')
+        return Redirect::to(route('user.view_profile'))
                             ->with('notice', "Profile updated successfully.");
     }
 

@@ -153,7 +153,7 @@ Route::post( 'user/update-setting',         'UserController@updateSetting');
 //user profile
 Route::group(array('before' => 'auth', 'prefix' => 'user'), function () {
     //Normal route
-    Route::get('profile', 'UserController@viewProfile');
+    Route::get('profile', 'UserController@viewProfile')->name('user.view_profile');
     
 	//Connect Clef to account. //Install 2fa
 	Route::get('profile/two-factor-auth/clef', 'ClefController@first_authentication');	
