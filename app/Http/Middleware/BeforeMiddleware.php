@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use DB;
 use App;
+use URL;
 use View;
 use Auth;
 use Post;
@@ -31,7 +32,7 @@ class BeforeMiddleware
      */
     public function handle($request, Closure $next)
     {
-
+        
         if ($request->getMethod() === 'POST') {
             //exit ('asas');
             //Route::callRouteFilter('csrf', [], '', $request);
