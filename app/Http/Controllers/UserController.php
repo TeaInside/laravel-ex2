@@ -10,6 +10,7 @@ use Config;
 use Confide;
 use Request;
 use Redirect;
+use Exception;
 use App\Models\News;
 use App\Models\Post;
 use App\Models\Role;
@@ -1064,7 +1065,11 @@ class UserController extends Controller
         $data['balance'] = sprintf('%.8f', $balance_amount);
 
         //echo "<pre>".dd(DB::getQueryLog())."</pre>";
+        try {
          $wallet->connectJsonRPCclient($wallet->wallet_username, $wallet->wallet_password, $wallet->wallet_ip, $wallet->port);
+        } catch (Exception $e) {
+            $data['error_message']= "Not connected to this wallet";
+        }
          //echo "Fee: ".$wallet->getTxFee();
          //echo "<br>getDepositAddress: ".$wallet->getDepositAddress('test');
         // echo "<br>getReceivedByAccount: ".$wallet->getReceivedByAccount('');
