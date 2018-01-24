@@ -27,6 +27,7 @@ class admin
         if (isset($q->name) && $q->name === 'Admin') {
             return $next($request);
         } else {
+            http_response_code(403);
             ?>
             <!DOCTYPE html>
             <html>
@@ -39,6 +40,7 @@ class admin
             </head>
             </html>
             <?php
+            exit();
         }
     }
 }
