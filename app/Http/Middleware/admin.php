@@ -34,7 +34,7 @@ class admin
             <head>
                 <script type="text/javascript">
                     alert('You are not allowed to access this page!');
-                    window.location = '/';
+                    window.location = '<?php print route('user.view_profile'); ?>';
                 </script>
                 <title>403 Forbidden</title>
             </head>
