@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use DB;
 use Confide;
 use Closure;
 use Redirect;
@@ -20,7 +21,7 @@ class user
         $a = Confide::user();
         if ($a === null) {
             return Redirect::to(route('user.login'));
-        }
+        }        
         return $next($request);
     }
 }

@@ -50,7 +50,7 @@ Route::post('page/submit-coin', 'HomeController@submitCoin');
 //pages , news
 Route::get('post/{post}', 'HomeController@viewPost');
 #################################################################################
-Route::group(array('before' => array('auth','admin'),'prefix' => 'admin'), function()
+Route::group(array('before' => array('auth','admin'),'prefix' => 'admin', 'middleware' => 'App\Http\Middleware\admin'), function()
 {
     Route::get('/', 'admin\\AdminSettingController@routePage');
     Route::get('setting', 'admin\\AdminSettingController@routePage');
