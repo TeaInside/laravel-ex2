@@ -140,7 +140,7 @@ Route::get( 'referral/{referral}',                 'UserController@create');
 Route::get( 'user/register',                 'UserController@create');
 Route::get( 'user/register',                 'UserController@register')->name('register');
 Route::post('user',                        'UserController@store');
-Route::get( 'login',                        'UserController@login');
+Route::get( 'login',                        'UserController@login')->name('user.login');
 Route::post('user/login',                  'UserController@do_login');
 Route::get( 'user/confirm/{code}',         'UserController@confirm');
 Route::get( 'user/forgot_password',        'UserController@forgot_password')->name('forgot_password');
@@ -151,7 +151,7 @@ Route::get( 'user/logout',                 'UserController@logout');
 Route::post( 'check-captcha',               'UserController@checkCaptcha');
 Route::post( 'user/update-setting',         'UserController@updateSetting');
 //user profile
-Route::group(array('before' => 'auth', 'prefix' => 'user'), function () {
+Route::group(array('before' => 'auth', 'prefix' => 'user', 'middleware' => 'App\Http\Middleware\user'), function () {
     //Normal route
     Route::get('profile', 'UserController@viewProfile')->name('user.view_profile');
     
