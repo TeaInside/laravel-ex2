@@ -1058,6 +1058,9 @@ class UserController extends Controller
         $market = new Market();
 
         $data['page'] = 'deposit';
+        if (! isset($wallet->type)) {
+            abort(404);
+        }
         $data['current_coin'] = $wallet->type;//$wallet->getType($wallet_id);
         $data['name_coin'] = $wallet->name;
 

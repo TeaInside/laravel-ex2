@@ -26,7 +26,7 @@
 				</div>
 			@endif  
 			@if($wallet->enable_withdraw)
-				<form id="wihtdrawForm" class="form-horizontal" method="POST" action="{{{ Auth::check('UserController@doWithdraw') ?: URL::to('/user/withdraw') }}}">
+				<form id="wihtdrawForm" class="form-horizontal" method="POST" action="{{{ URL::to('/user/withdraw') }}}">
 					<input type="hidden" name="_token" id="_token" value="{{{ Session::token() }}}">
 					<div class="control-group">
 						<label class="col-lg-2 control-label">{{$current_coin}} Amount</label>
